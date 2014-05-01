@@ -18,7 +18,6 @@ def calc_skyline(in_lst):
         if tup[0] > prev_high_water_mark[0]:
             pass
 
-
     return rtn
 
 def break_into_chunks(in_lst):
@@ -28,12 +27,9 @@ def break_into_chunks(in_lst):
     to
     [[(1,2,3),(2,3,4)],[(7,8,9)]
     '''
-    rtn_lst = []
     chunk_lst = []
     fst = True
     right_edge = 0
-    add_last = False
-    print in_lst
 
     for tup in in_lst:
         if fst:
@@ -42,21 +38,17 @@ def break_into_chunks(in_lst):
             right_edge = tup[2]
             continue
         if tup[0] > right_edge:
-            rtn_lst.append(chunk_lst)
+            yield chunk_lst
             chunk_lst = []
-            add_last = False
-        else:
-            add_last = True
+
         if tup[2] > right_edge:
             right_edge = tup[2]
 
         chunk_lst.append(tup)
-    if add_last:
-        rtn_lst.append(chunk_lst)
-
-    return  rtn_lst
+    if chunk_lst:
+        yield chunk_lst
 
 if __name__ == '__main__':
-    #print calc_skyline([(1,11,5),(2,6,7),(3,13,9),(12,7,16),(14,3,25),(19,18,22),(23,13,29),(24,4,28)])
-    #print (1,11,3,13,9,0,12,7,16,3,19,18,22,3,23,13,29,0)
-    print break_into_chunks([(1,11,5),(2,6,7),(3,13,9),(12,7,16),(14,3,25),(19,18,22),(23,13,29),(24,4,28)])
+    print "[(1,11,5),(2,6,7),(3,13,9),(12,7,16),(14,3,25),(19,18,22),(23,13,29),(24,4,28)]"
+    for x in break_into_chunks([(1,11,5),(2,6,7),(3,13,9),(12,7,16),(14,3,25),(19,18,22),(23,13,29),(24,4,28)]):
+        print x
