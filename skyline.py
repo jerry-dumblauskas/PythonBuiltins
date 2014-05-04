@@ -17,8 +17,7 @@ def calc_skyline2(in_lst):
             m_len = tup[2]
     for _ in range(m_len + 2):
         stack_lst.append([0])
-    #print m_len
-    #print len(stack_lst)
+
     '''
     load data structure
     stack_lst will be a list of lists, each position will
@@ -29,8 +28,6 @@ def calc_skyline2(in_lst):
     for tup in in_lst:
         for x in range(tup[0], tup[2] + 1):
                 stack_lst[x].append(tup[1])
-    print stack_lst
-    print len(stack_lst)
 
     '''
     analyze data and return result
@@ -111,7 +108,7 @@ def break_into_chunks(in_lst):
         yield chunk_lst
 
 if __name__ == '__main__':
-    print "[(1,11,5),(2,6,7),(3,13,9),(12,7,16),(14,3,25),(19,18,22),(23,13,29),(24,4,28)]"
+    #print "[(1,11,5),(2,6,7),(3,13,9),(12,7,16),(14,3,25),(19,18,22),(23,13,29),(24,4,28)]"
     print (1,11,3,13,9,0,12,7,16,3,19,18,22,3,23,13,29,0)
     print calc_skyline2([(1,11,5),(2,6,7),(3,13,9),(12,7,16),(14,3,25),(19,18,22),(23,13,29),(24,4,28)])
     #for x in break_into_chunks([(1,11,5),(2,6,7),(3,13,9),(12,7,16),(14,3,25),(19,18,22),(23,13,29),(24,4,28)]):
