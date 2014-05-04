@@ -1,24 +1,86 @@
 __author__ = 'jerrydumblauskas'
 
-def calc_skyline(in_lst):
+def calc_skyline2(in_lst):
+    '''
+    in_lst = [(1,11,5),(2,6,7),(3,13,9)]
+    rtn (1,11,3,13,9,0,12,7,16,3,19,18,22,3,23,13,29,0)
+    '''
     rtn = [] # hor, vert
-    prev_high_water_mark = [0,0,0] #lft, hgt, rgh
-    l_first = True
+    stack_lst = []
+    m_len = 0
+    '''
+    build data structure
+
+    '''
     for tup in in_lst:
-        if l_first:
-            l_first = False
-            rtn.append(tup[0])
-            rtn.append(tup[1])
-            prev_lst = list(tup)
-            continue
-        '''
-        now check the prev lst and update values
+        if m_len < tup[2]:
+            m_len = tup[2]
+    for _ in range(m_len + 2):
+        stack_lst.append([0])
+    #print m_len
+    #print len(stack_lst)
+    '''
+    load data structure
+    stack_lst will be a list of lists, each position will
+    have at least 2 entries, a max and a min and if there is a change
+    in maxes between positions, we will go down to the min, or where there is
+    a match
+    '''
+    for tup in in_lst:
+        for x in range(tup[0], tup[2] + 1):
+                stack_lst[x].append(tup[1])
+    print stack_lst
+    print len(stack_lst)
 
-        '''
-        if tup[0] > prev_high_water_mark[0]:
-            pass
+    '''
+    analyze data and return result
+    '''
+    for x in range(1, len(stack_lst)):
+        if max(stack_lst[x]) > max(stack_lst[x-1]):
+            rtn.append(x)
+            rtn.append(max(stack_lst[x]))
+        elif max(stack_lst[x]) < max(stack_lst[x-1]):
+            rtn.append(x-1)
+            rtn.append(poop(stack_lst[x-1], stack_lst[x]))
+            if max(stack_lst[x]) > poop(stack_lst[x-1], stack_lst[x]):
+                rtn.append(x)
+                rtn.append(max(stack_lst[x]))
+    return tuple(rtn)
 
-    return rtn
+def poop(lst1, lst2):
+    lst1_s = sorted(lst1, reverse=True)
+    lst1_s.pop()
+    for l_val in lst1_s:
+        if l_val in lst2:
+            return l_val
+    return  0
+
+def calc_skyline(in_lst):
+    '''
+    (1,11,3,13,9,0,12,7,16,3,19,18,22,3,23,13,29,0)
+    '''
+    rtn = [] # hor, vert
+
+    for lsts in break_into_chunks(in_lst):
+        fst = True
+        hgt = 0
+        rght = 0
+        for tup in lsts:
+            if fst:
+                fst = False
+                rtn.append(tup[0])
+                rtn.append(tup[1])
+                hgt = tup[1]
+                rght = tup[2]
+                continue
+            if (tup[1] > hgt):
+                hgt = tup[1]
+                rtn.append(tup[0])
+            if (tup[2] > rght):
+                rght = tup[2]
+
+
+    return tuple(rtn)
 
 def break_into_chunks(in_lst):
     '''
@@ -50,5 +112,7 @@ def break_into_chunks(in_lst):
 
 if __name__ == '__main__':
     print "[(1,11,5),(2,6,7),(3,13,9),(12,7,16),(14,3,25),(19,18,22),(23,13,29),(24,4,28)]"
-    for x in break_into_chunks([(1,11,5),(2,6,7),(3,13,9),(12,7,16),(14,3,25),(19,18,22),(23,13,29),(24,4,28)]):
-        print x
+    print (1,11,3,13,9,0,12,7,16,3,19,18,22,3,23,13,29,0)
+    print calc_skyline2([(1,11,5),(2,6,7),(3,13,9),(12,7,16),(14,3,25),(19,18,22),(23,13,29),(24,4,28)])
+    #for x in break_into_chunks([(1,11,5),(2,6,7),(3,13,9),(12,7,16),(14,3,25),(19,18,22),(23,13,29),(24,4,28)]):
+     #   print x
