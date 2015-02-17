@@ -1,5 +1,7 @@
 __author__ = 'jerrydumblauskas'
 
+# for a brain teaser problem -- will grab the url later
+
 def calc_skyline2(in_lst):
     '''
     in_lst = [(1,11,5),(2,6,7),(3,13,9)]
