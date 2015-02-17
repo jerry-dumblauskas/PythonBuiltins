@@ -27,12 +27,15 @@ x = []
 print any(x)
 print "===================================="
 print "basestring()"
+print "This abstract type is the superclass for str and unicode. It cannot be called or instantiated"
 print "===================================="
 print "bin()"
 print "Convert an integer number to a binary string"
 print "bin(4) gives %s , a binary string and is type %s" % (bin(4), type(bin(4)))
 print "===================================="
 print "bool()"
+print "Return a Boolean value, i.e. one of True or False"
+print "bool(0) gives %s, and bool(1) gives %s" % ( bool(0), bool(1))
 print "===================================="
 print "bytearray()"
 print "===================================="
