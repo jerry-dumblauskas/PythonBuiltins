@@ -42,6 +42,8 @@ print "===================================="
 print "callable()"
 print "===================================="
 print "chr()"
+print "Return a string of one character whose ASCII code is the integer i."
+print "chr(97) evaluates to >%s<" % chr(97)
 print "===================================="
 print "classmethod()"
 print "===================================="
