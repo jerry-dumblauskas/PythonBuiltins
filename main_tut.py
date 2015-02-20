@@ -108,10 +108,16 @@ print "===================================="
 print "iter()"
 print "===================================="
 print "len()"
+print "Return the length (the number of items) of an object."
+print "len([1,2,3,4]) is %s" % len([1,2,3,4])
 print "===================================="
-print "list()"
+print "list(iterable)"
+print "Return a list whose items are the same and in the same order as iterable's items."
+print "list('abc') is %s" % list('abc')
 print "===================================="
 print "locals()"
+print "Update and return a dictionary representing the current local symbol table."
+print "locals() returns %s" % locals()
 print "===================================="
 print "long()"
 print "===================================="
