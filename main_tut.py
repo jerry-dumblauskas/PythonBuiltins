@@ -47,13 +47,25 @@ print "chr(97) evaluates to >%s<" % chr(97)
 print "===================================="
 print "classmethod()"
 print "===================================="
-print "cmp()"
+print "cmp(x, y)"
+print "Compare the two objects x and y and return an integer according to the outcome."
+print "The return value is negative if x < y, zero if x == y and strictly positive if x > y."
+print "cmp(10,0) is %s" % cmp(10,0)
 print "===================================="
 print "compile()"
+print "compile is the low level way to dynamically run up code"
+print "Compile the source into a code or AST object. Code objects can be executed by an exec statement or evaluated by a call to eval()."
+zzz=compile("ppp=99",'<string>','exec')
+exec zzz
+print "zzz=compile('ppp=99','<string>','exec') , then executing exec zzz, then printing ppp gives %s" % ppp
 print "===================================="
-print "complex()"
+print "complex([real[, imag]])"
+print "Return a complex number with the value real + imag*j or convert a string or number to a complex number. "
+print "complex(10,-5) returns %s" % complex(10,-5)
 print "===================================="
-print "delattr()"
+print "delattr(object, name)"
+print "The function deletes the named attribute of the object, provided the object allows it. "
+print ""
 print "===================================="
 print "dict()"
 print "===================================="
@@ -165,6 +177,7 @@ print "===================================="
 print "setattr()"
 print "===================================="
 print "slice()"
+print "returns a slice object, used by library writers so y=slice(1,11,3) has a start,stop and step indexes, y.step = %s" % slice(1,11,3).step
 print "===================================="
 print "sorted()"
 print "===================================="
