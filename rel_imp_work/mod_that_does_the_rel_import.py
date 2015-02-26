@@ -1,6 +1,6 @@
 __author__ = 'jerrydumblauskas'
 
-from mod_to_be_relative_imported import Worker
+from .mod_to_be_relative_imported import Worker
 
 '''
 why doesn't this work?
