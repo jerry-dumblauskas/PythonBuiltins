@@ -68,12 +68,20 @@ print "The function deletes the named attribute of the object, provided the obje
 print ""
 print "===================================="
 print "dict()"
+print "creates a dict, with either an mapping and iterable or kwargs"
+print "dict(one=1, two=2, three=3) prints %s" % dict(one=1, two=2, three=3)
 print "===================================="
 print "dir()"
+print "Without arguments, return the list of names in the current local scope. With an argument, attempt to return a list of valid attributes for that object."
+print "So, dir() is %s" % dir()
 print "===================================="
 print "divmod()"
+print "Take two (non complex) numbers as arguments and return a pair of numbers consisting of their quotient and remainder when using long division"
+print "divmod(7,2) gives %s" % str(divmod(7,2))
 print "===================================="
 print "enumerate()"
+print "with a passed iterable, creates an iter object that return a tuple with the pos,val"
+print "enumerate([1,2,3,4,5]).next() gives %s" % str(enumerate([1,2,3,4,5]).next())
 print "===================================="
 print "eval()"
 print "===================================="
