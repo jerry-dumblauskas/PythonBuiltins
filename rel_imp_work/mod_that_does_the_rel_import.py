@@ -8,5 +8,9 @@ why doesn't this work?
 
 print Worker().caller()
 
+def junk():
+    print "done"
+
+
 if __name__ == "__main__":
     print "boom"
