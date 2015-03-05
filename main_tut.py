@@ -225,12 +225,18 @@ print "===================================="
 print "staticmethod()"
 print "===================================="
 print "str()"
+print "Return a string containing a nicely printable representation of an object."
+print "str('test') is %s" % str('test')
 print "===================================="
 print "sum()"
+print "Sums start and the items of an iterable from left to right and returns the total."
+print "sum(range(101)) gives %s" % sum(range(101))
 print "===================================="
 print "super()"
 print "===================================="
 print "tuple()"
+print "Return a tuple whose items are the same and in the same order as iterable' items."
+print "tuple([1,2,3,4,5]) returns %s and has type of %s" % (tuple([1,2,3,4,5]), type(tuple([1,2,3,4,5])))
 print "===================================="
 print "type()"
 print "===================================="
