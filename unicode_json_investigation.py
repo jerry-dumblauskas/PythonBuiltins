@@ -20,3 +20,28 @@ output.writerow(data[0].keys())  # header row
 
 for row in data:
     output.writerow(row.values())
+
+# tactical fix -- custom object hook in json.load
+# I don't like this approach and need to find a better way
+def dict_to_object(d):
+    rtn={}
+    for key in d.keys():
+        m_val = d[key]
+        if isinstance(m_val, unicode):
+            m_val = str(m_val)
+
+        rtn[str(key)] = m_val
+
+    return rtn
+
+input = open(sys.argv[1])
+data = json.load(input, object_hook=dict_to_object)
+input.close()
+
+output = csv.writer(sys.stdout)
+
+output.writerow(data[0].keys())  # header row
+
+
+for row in data:
+	output.writerow(row.values())
