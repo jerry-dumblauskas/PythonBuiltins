@@ -221,8 +221,11 @@ print "slice()"
 print "returns a slice object, used by library writers so y=slice(1,11,3) has a start,stop and step indexes, y.step = %s" % slice(1,11,3).step
 print "===================================="
 print "sorted()"
+print "a NEW, sorted copy of an iterable"
+print "sorted([5,3,2,6,5]) gives %s" % sorted([5,3,2,6,5])
 print "===================================="
 print "staticmethod()"
+print "Return a static method for function. Used in classes -- gets rid of the 'self'"
 print "===================================="
 print "str()"
 print "Return a string containing a nicely printable representation of an object."
@@ -239,24 +242,45 @@ print "Return a tuple whose items are the same and in the same order as iterable
 print "tuple([1,2,3,4,5]) returns %s and has type of %s" % (tuple([1,2,3,4,5]), type(tuple([1,2,3,4,5])))
 print "===================================="
 print "type()"
+print "2 uses -- called as type(object) gives the type"
+print "called with type(name, bases, dict) -- creates a new class"
+print "type(1) gives %s" % type(1)
+print "type('yy', str, dict(a=1)) gives %s" % type('yy', (object,), dict(a=1))
 print "===================================="
 print "unichr()"
+print "Return the Unicode string of one character whose Unicode code is the integer i."
+print "unichr(97) gives %s" % unichr(97)
 print "===================================="
 print "unicode()"
+print "Return the Unicode string version of object"
+print "unicode('ggg') gives %s" % unicode('ggg')
 print "===================================="
 print "vars()"
+print "Return the __dict__ attribute for a module, class, instance, or any other object with a __dict__ attribute."
+tst= type('yy', (object,), dict(a=1))
+print "vars(tst) (where tst is type('yy', (object,), dict(a=1))) gives %s" % vars(tst)
 print "===================================="
 print "xrange()"
+print "memory friendly range()"
+print "xrange(5,11,2) gives %s" % xrange(5,11,2)
 print "===================================="
 print "zip()"
+print "This function returns a list of tuples, where the i-th tuple contains the i-th element from each of the argument sequences or iterables."
+print "zip([1,2,3], [4,5,6]) gives %s" % zip([1,2,3], [4,5,6])
 print "===================================="
 print "__import__()"
+print "This function is invoked by the import statement."
+print "this is a dynamic way to import code only at runtime -- advanced jutsu"
 print "===================================="
 print "apply()"
+print "deprecated -- don't use this"
 print "===================================="
 print "buffer()"
+print "deprecated -- don't use this"
 print "===================================="
 print "coerce()"
+print "deprecated -- don't use this"
 print "===================================="
 print "intern()"
+print "deprecated -- don't use this"
 print "===================================="
