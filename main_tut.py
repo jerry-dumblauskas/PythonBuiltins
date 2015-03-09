@@ -113,24 +113,35 @@ print "===================================="
 print "hasattr()"
 print "===================================="
 print "hash()"
+print "Return the hash value of the object (if it has one). "
+print "hash('a') gives %s" % hash('a')
 print "===================================="
 print "help()"
+print "Invoke the built-in help system."
+print "help(str) gives %s" % help(str)
 print "===================================="
 print "hex()"
+print "Convert an integer number (of any size) to a lowercase hexadecimal string prefixed with '0x'"
+print "hex(25) gives %s" % hex(25)
 print "===================================="
 print "id()"
 print "Return the 'identity' of an object."
 print "id(44) is %s" % id(44)
 print "===================================="
 print "input()"
+print "reads from the standard input.."
 print "===================================="
 print "int()"
 print "Return an integer object constructed from a number or string x"
 print "int(4.5) is %s and has type of %s" % (int(4.5), type(int(4.5)) )
 print "===================================="
 print "isinstance()"
+print "Return true if the object argument is an instance of the classinfo argument"
+print "isinstance('g', str) gives %s" % isinstance("g", str)
 print "===================================="
 print "issubclass()"
+print "Return true if class is a subclass (direct, indirect or virtual) of classinfo."
+print "Used in class programming"
 print "===================================="
 print "iter()"
 print "Return an iterator object. Object must be a kind of sequence"
@@ -149,8 +160,12 @@ print "Update and return a dictionary representing the current local symbol tabl
 print "locals() returns %s" % locals()
 print "===================================="
 print "long()"
+print "Return a long integer object constructed from a string or number x."
+print "print long(444.55) gives %s" % long(444.55)
 print "===================================="
 print "map()"
+print "map a function to an iterable"
+print "map((lambda x:x+x),[1,2,3,4,5,6]) gives %s" % map((lambda x:x+x),[1,2,3,4,5,6])
 print "===================================="
 print "max()"
 print "Return the max amount of an iterable, or of a number of arguments"
@@ -186,6 +201,7 @@ print "Return x to the power y;"
 print "pow(2,5) is %s" % pow(2,5)
 print "===================================="
 print "print()"
+print "Print objects to the stream file -- THIS IS MANDATORY IN PY 3 --GET USED TO IT"
 print "===================================="
 print "property()"
 print "Return a property attribute for new-style classes (classes that derive from object)."
@@ -196,7 +212,7 @@ print " create lists containing arithmetic progressions., start, stop ,step as a
 print "range(5,11,2) gives %s" % range(5,11,2)
 print "===================================="
 print "raw_input()"
-print "===================================="
+print "reads from the standard input.."
 print "===================================="
 print "reduce()"
 print "Apply function of two arguments cumulatively to the items of iterable (func, iterable, initializer)"
@@ -210,12 +226,20 @@ print "Return a string containing a printable representation of an object. "
 print "repr('test') returns %s" % repr('test')
 print "===================================="
 print "reversed()"
+print "Return a reverse iterator from a passed seq"
+print "reversed([1,2,3]) gives %s" % reversed([1,2,3])
 print "===================================="
 print "round()"
+print "Return the floating point value number rounded to ndigits digits after the decimal point."
+print "round(6.6456,2) gives %s" % round(6.6456,2)
 print "===================================="
 print "set()"
+print "Return a new set object, optionally with elements taken from iterable. set is a built-in class. "
+print "set([1,1,1,1]) gives %s" % set([1,1,1,1])
 print "===================================="
 print "setattr()"
+print "This is the counterpart of getattr(). The arguments are an object, a string and an arbitrary value. "
+print "used on objects -- kinda like monkey patching to me...."
 print "===================================="
 print "slice()"
 print "returns a slice object, used by library writers so y=slice(1,11,3) has a start,stop and step indexes, y.step = %s" % slice(1,11,3).step
