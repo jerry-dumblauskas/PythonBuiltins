@@ -105,12 +105,22 @@ print "===================================="
 print "format()"
 print "===================================="
 print "frozenset()"
+print "creates a frozen set -- a specific immutable py type, from an interable"
+print "frozenset([1,2,3,4,5]) gives %s" % frozenset([1,2,3,4,5])
 print "===================================="
 print "getattr()"
+print "This is the counterpart of setattr(). The arguments are an object, and a string name. "
+print "used on objects ...."
+print "getattr('123', 'isalpha') gives %s" % getattr('123', 'isalpha')
 print "===================================="
 print "globals()"
+print "Return a dictionary representing the current global symbol table. "
+print "globals() gives %s" % globals()
 print "===================================="
 print "hasattr()"
+print "This is the counterpart of setattr(). The arguments are an object and a string name. "
+print "used on objects calls getattr and checks for an exception...."
+print "hasattr('gg', 'monkey') gives %s" % hasattr('gg', 'monkey')
 print "===================================="
 print "hash()"
 print "Return the hash value of the object (if it has one). "
