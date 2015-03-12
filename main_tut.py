@@ -103,6 +103,9 @@ print "Return a floating point number constructed from a number or string x"
 print "float(4.5) is %s and has type of %s" % (float(4.5), type(float(4.5)) )
 print "===================================="
 print "format()"
+print "Convert a value to a 'formatted' representation, as controlled by format_spec."
+print "see the format spec"
+print "format(10000000, ',') gives %s " % format(10000000, ',')
 print "===================================="
 print "frozenset()"
 print "creates a frozen set -- a specific immutable py type, from an interable"
@@ -270,6 +273,8 @@ print "Sums start and the items of an iterable from left to right and returns th
 print "sum(range(101)) gives %s" % sum(range(101))
 print "===================================="
 print "super()"
+print("super (type, object) Return a proxy object that delegates method calls to a parent or sibling class of type")
+print "This changed alot in 3 -- so I'm ignoring till 3"
 print "===================================="
 print "tuple()"
 print "Return a tuple whose items are the same and in the same order as iterable' items."
