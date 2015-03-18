@@ -75,5 +75,9 @@ for t in y:
 
 print "Braden's idiom"
 s = ('x1','y1','z1','x2','y2','z2','x3','y3','z3')
-
+print "so this is a list of 'x1','y1','z1','x2','y2','z2','x3','y3','z3'"
+print "when we splat the iter -- we get 3 refs to the same iter object"
+print "so each pointer to the same iter objects pulls from the same list i.e. s"
+print "the intermediate form is (x1,x2,x3), (y1,y2,y3), (z1,z2,z3)"
+print "the above, zipped, is below"
 print zip(*[iter(s)]*3)
