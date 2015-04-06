@@ -1,7 +1,7 @@
 __author__ = 'jerrydumblauskas'
 
 '''
-idiom -- you have a dict, you want to extract a sub dict
+recipe 1 -- you have a dict, you want to extract a sub dict
 based on a list of keys
 '''
 main_dict = {'a':1, 'b':2, 'c':3, 'd':4, 'f':5, 'g':6, 'h':7}
