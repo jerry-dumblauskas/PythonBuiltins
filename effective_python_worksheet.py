@@ -1,14 +1,66 @@
 __author__ = 'jerrydumblauskas'
 
 import sys
-# item 1 version
-print "====ITEM 1 -- Know which version you are using===="
+# Item 1 version
+print "====ITEM 1 -- Know which version you are using ===="
 
 print(sys.version_info)
 print(sys.version)
 
-# item 2 Pep 8
-print "====ITEM 2 -- Use PEP 8!!===="
+# Item 2 Pep 8
+print "====ITEM 2 -- Use PEP 8!! ===="
 
-print(sys.version_info)
-print(sys.version)
+print "pip install pylint, and use it!"
+
+# Item 3 Know the Differences Between bytes, str, and unicode
+print "====ITEM 3 -- Know the Differences Between bytes, str, and unicode ===="
+
+print "for py2 just str and unicode"
+print "str is raw 8 bit values -- unicode is all else"
+print "str is the lowest level -- the thing you encode to (the binary representation)"
+print "string to unicode ----- you must decode the string"
+print "unicode to string ----- you must encode the unicode"
+
+# Item 4 Write Helper Functions Instead of Complex Expressions
+print "====ITEM 4 -- Write Helper Functions Instead of Complex Expressions ===="
+
+print "this is a stylistic rule -- what some consider clear and concise"
+print "some will consider obtuse and bloated"
+print "the rule here is don't show off your one line ability"
+
+# Item 5 Know How to Slice Sequences
+print "====ITEM 5 -- Know How to Slice Sequences ===="
+
+print "using this list a = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']"
+a = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+print "a[0;5] == a[:5] so do that"
+print a[:5]
+print a[:-1]
+print "remember -- slices make copies of the list!"
+print id(a)
+r=a[-5:]
+r[0] = 5
+print r
+print id(r)
+print a
+
+
+# Item 6 ...
+print "====ITEM 6 -- ===="
+
+print "..."
+print "..."
+
+
+# Item 7 ...
+print "====ITEM 7 -- ===="
+
+print "..."
+print "..."
+
+
+# Item _ ...
+print "====ITEM _ -- ===="
+
+print "..."
+print "..."
