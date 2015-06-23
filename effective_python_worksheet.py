@@ -46,7 +46,7 @@ print a
 
 
 # Item 6 ...
-print "====ITEM 6 -- ===="
+print "====ITEM 6 -- Avoid Using start, end, and stride in a Single Slice===="
 
 print "..."
 print "..."
@@ -64,3 +64,33 @@ print "====ITEM _ -- ===="
 
 print "..."
 print "..."
+
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+flat = [x for row in matrix for x in row]
+print flat
+
+matrix1 = [(1, 2, 3), (4, 5, 6), (7, 8, 9)]
+flat1 = [x[0] for x in matrix1]
+print flat1
+
+def pop(x):
+    print x
+
+
+def sort_priority(values, group):
+    def helper(x):
+        if x in group:
+            return (0,x)
+        return (1,x)
+    values.sort(key=helper)
+
+
+def sort_priority2(values, group):
+    found = [False]
+    def helper1(x):
+        if x in group:
+            found[0] = True
+            return (0,x)
+        return (1,x)
+    values.sort(key=helper1)
+    return found[0]
