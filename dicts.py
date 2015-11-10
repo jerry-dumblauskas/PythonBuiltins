@@ -12,3 +12,15 @@ print "the dict is:" + str(main_dict)
 print "here is the list of keys:" + str(sub_lst)
 print "after the one line method:" + str(sub_dict)
 
+'''
+recipe 2 (and one of the most important items)
+when you iterate over a dict you iterate over keys!
+'''
+
+if 'f' in main_dict:
+    print "true"
+
+if 'z' in main_dict:
+    print("true")
+else:
+    print ("false")
