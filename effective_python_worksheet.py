@@ -50,7 +50,7 @@ print a[::-2]
 
 print "hard to read a[0:6:-3], and what does it return (it's a trick)"
 print "in this case starts at 0, and goes back, and since there is nothing......"
-print "so [::-1] works because == If i or j are omitted or None, they become “end” values (which end depends on the SIGN of k)"
+print "so [::-1] works because == If i or j are omitted or None, they become 'end' values (which end depends on the SIGN of k)"
 print a[0:6:-3]
 
 
