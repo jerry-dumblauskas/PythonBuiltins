@@ -55,10 +55,15 @@ print a[0:6:-3]
 
 
 # Item 7 ...
-print "====ITEM 7 -- ===="
+print "====ITEM 7 Use List Comprehensions Instead of map and filter ===="
 
-print "..."
-print "..."
+b = [1,2,3,4,5,6,7,8,9]
+print "map and filters need lambdas (or at least a function"
+print "squares = [x**2 for x in b] "
+print [x**2 for x in b]
+print "vs"
+print "squares = map(lambda x: x ** 2, b)"
+print map(lambda x: x ** 2, b)
 
 
 # Item _ ...
