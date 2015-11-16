@@ -66,11 +66,25 @@ print "squares = map(lambda x: x ** 2, b)"
 print map(lambda x: x ** 2, b)
 
 
+# Item 8 ...
+print "====ITEM 8 Avoid More Than Two Expressions in List Comprehensions ===="
+
+print "This is a simple one, no code needed, as I don't want to write a convoluted example to say"
+print "DON'T DO THAT"
+
+
 # Item _ ...
 print "====ITEM _ -- ===="
 
 print "..."
 print "..."
+
+# Item _ ...
+print "====ITEM _ -- ===="
+
+print "..."
+print "..."
+
 
 matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 flat = [x for row in matrix for x in row]
