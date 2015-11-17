@@ -73,11 +73,16 @@ print "This is a simple one, no code needed, as I don't want to write a convolut
 print "DON'T DO THAT"
 
 
-# Item _ ...
-print "====ITEM _ -- ===="
+# Item 9 ...
+print "====ITEM 9 Consider Generator Expressions for Large Comprehensions ===="
 
-print "..."
-print "..."
+print "if large, you can run out of memory"
+print "value = [len(x) for x in open('/tmp/my_file.txt')]"
+print "what if my_file is 10 gig??"
+print "try it = (len(x) for x in open('/tmp/my_file.txt'))"
+print "call by it.next()"
+print "also, Generator expressions can be composed by passing the iterator from one generator expression into the for subexpression of another."
+print " i.e -- you can chain them"
 
 # Item _ ...
 print "====ITEM _ -- ===="
