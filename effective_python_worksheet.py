@@ -84,7 +84,45 @@ print "call by it.next()"
 print "also, Generator expressions can be composed by passing the iterator from one generator expression into the for subexpression of another."
 print " i.e -- you can chain them"
 
-# Item _ ...
+# Item 10 ...
+print "====ITEM Item 10: Prefer enumerate Over range ===="
+
+print "like range, but gives you a tuple with position"
+print "range(10) vs enumerate(10) vs enumerate(10,1)"
+print range(10)
+print list(enumerate(range(10)))
+print list(enumerate(range(10),1))
+
+
+# Item 11 ...
+print "====ITEM 11: Use zip to Process Iterators in Parallel ===="
+
+print "two or more iterators can be processed in parallel"
+print "in python output is full, in 3 gives an iterator"
+print zip(enumerate(range(10)), enumerate(range(10), 1))
+
+# Item 12 ...
+print "====ITEM 12 Avoid else Blocks After for and while Loops ===="
+
+print "this is stylistic, but valid -- not many people know this"
+print "this else should be called 'nobreak' "
+
+# Item 13 ...
+print "====ITEM 13: Take Advantage of Each Block in try/except/else/finally ===="
+
+print "stylistic"
+print "try:"
+print " something"
+print "except Exception as e:"
+print " handle exception"
+print "else:"
+print " no exception, was ok"
+print "finally:"
+print " no matter what run this"
+
+print "not sure I agree with the else clause here"
+
+# Item __ ...
 print "====ITEM _ -- ===="
 
 print "..."
