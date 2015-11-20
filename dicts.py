@@ -8,9 +8,9 @@ main_dict = {'a':1, 'b':2, 'c':3, 'd':4, 'f':5, 'g':6, 'h':7}
 sub_lst = ['a', 'h', 'g']
 sub_dict = dict([x for x in main_dict.items() if x[0] in sub_lst])
 
-print "the dict is:" + str(main_dict)
-print "here is the list of keys:" + str(sub_lst)
-print "after the one line method:" + str(sub_dict)
+print ("the dict is:" + str(main_dict))
+print ("here is the list of keys:" + str(sub_lst))
+print ("after the one line method:" + str(sub_dict))
 
 '''
 recipe 2 (and one of the most important items)
@@ -18,9 +18,9 @@ when you iterate over a dict you iterate over keys!
 '''
 
 if 'f' in main_dict:
-    print "true"
+    print ("true")
 
 if 'z' in main_dict:
-    print("true")
+    print(("true"))
 else:
-    print ("false")
+    print (("false"))
