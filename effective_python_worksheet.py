@@ -2,158 +2,158 @@ __author__ = 'jerrydumblauskas'
 
 import sys
 # Item 1 version
-print "====ITEM 1 -- Know which version you are using ===="
+print("====ITEM 1 -- Know which version you are using ====")
 
-print(sys.version_info)
-print(sys.version)
+print((sys.version_info))
+print((sys.version))
 
 # Item 2 Pep 8
-print "====ITEM 2 -- Use PEP 8!! ===="
+print("====ITEM 2 -- Use PEP 8!! ====")
 
-print "pip install pylint, and use it!"
+print("pip install pylint, and use it!")
 
 # Item 3 Know the Differences Between bytes, str, and unicode
-print "====ITEM 3 -- Know the Differences Between bytes, str, and unicode ===="
+print("====ITEM 3 -- Know the Differences Between bytes, str, and unicode ====")
 
-print "for py2 just str and unicode"
-print "str is raw 8 bit values -- unicode is all else"
-print "str is the lowest level -- the thing you encode to (the binary representation)"
-print "string to unicode ----- you must decode the string"
-print "unicode to string ----- you must encode the unicode"
+print("for py2 just str and unicode")
+print("str is raw 8 bit values -- unicode is all else")
+print("str is the lowest level -- the thing you encode to (the binary representation)")
+print("string to unicode ----- you must decode the string")
+print("unicode to string ----- you must encode the unicode")
 
 # Item 4 Write Helper Functions Instead of Complex Expressions
-print "====ITEM 4 -- Write Helper Functions Instead of Complex Expressions ===="
+print("====ITEM 4 -- Write Helper Functions Instead of Complex Expressions ====")
 
-print "this is a stylistic rule -- what some consider clear and concise"
-print "some will consider obtuse and bloated"
-print "the rule here is don't show off your one line ability"
+print("this is a stylistic rule -- what some consider clear and concise")
+print("some will consider obtuse and bloated")
+print("the rule here is don't show off your one line ability")
 
 # Item 5 Know How to Slice Sequences
-print "====ITEM 5 -- Know How to Slice Sequences ===="
+print("====ITEM 5 -- Know How to Slice Sequences ====")
 
-print "using this list a = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']"
+print("using this list a = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']")
 a = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-print "a[0;5] == a[:5] so do that"
-print a[:5]
-print a[:-1]
-print "remember -- slices make copies of the list!"
-print id(a)
+print("a[0;5] == a[:5] so do that")
+print(a[:5])
+print(a[:-1])
+print("remember -- slices make copies of the list!")
+print(id(a))
 r=a[-5:]
 r[0] = 5
-print r
-print id(r)
-print a
+print(r)
+print(id(r))
+print(a)
 
 # Item 6 ...
-print "====ITEM 6 -- Avoid Using start, end, and stride in a Single Slice===="
-print a[::-2]
+print("====ITEM 6 -- Avoid Using start, end, and stride in a Single Slice====")
+print(a[::-2])
 
-print "hard to read a[0:6:-3], and what does it return (it's a trick)"
-print "in this case starts at 0, and goes back, and since there is nothing......"
-print "so [::-1] works because == If i or j are omitted or None, they become 'end' values (which end depends on the SIGN of k)"
-print a[0:6:-3]
+print("hard to read a[0:6:-3], and what does it return (it's a trick)")
+print("in this case starts at 0, and goes back, and since there is nothing......")
+print("so [::-1] works because == If i or j are omitted or None, they become 'end' values (which end depends on the SIGN of k)")
+print(a[0:6:-3])
 
 
 # Item 7 ...
-print "====ITEM 7 Use List Comprehensions Instead of map and filter ===="
+print("====ITEM 7 Use List Comprehensions Instead of map and filter ====")
 
 b = [1,2,3,4,5,6,7,8,9]
-print "map and filters need lambdas (or at least a function"
-print "squares = [x**2 for x in b] "
-print [x**2 for x in b]
-print "vs"
-print "squares = map(lambda x: x ** 2, b)"
-print map(lambda x: x ** 2, b)
+print("map and filters need lambdas (or at least a function")
+print("squares = [x**2 for x in b] ")
+print([x**2 for x in b])
+print("vs")
+print("squares = map(lambda x: x ** 2, b)")
+print([x ** 2 for x in b])
 
 
 # Item 8 ...
-print "====ITEM 8 Avoid More Than Two Expressions in List Comprehensions ===="
+print("====ITEM 8 Avoid More Than Two Expressions in List Comprehensions ====")
 
-print "This is a simple one, no code needed, as I don't want to write a convoluted example to say"
-print "DON'T DO THAT"
+print("This is a simple one, no code needed, as I don't want to write a convoluted example to say")
+print("DON'T DO THAT")
 
 
 # Item 9 ...
-print "====ITEM 9 Consider Generator Expressions for Large Comprehensions ===="
+print("====ITEM 9 Consider Generator Expressions for Large Comprehensions ====")
 
-print "if large, you can run out of memory"
-print "value = [len(x) for x in open('/tmp/my_file.txt')]"
-print "what if my_file is 10 gig??"
-print "try it = (len(x) for x in open('/tmp/my_file.txt'))"
-print "call by it.next()"
-print "also, Generator expressions can be composed by passing the iterator from one generator expression into the for subexpression of another."
-print " i.e -- you can chain them"
+print("if large, you can run out of memory")
+print("value = [len(x) for x in open('/tmp/my_file.txt')]")
+print("what if my_file is 10 gig??")
+print("try it = (len(x) for x in open('/tmp/my_file.txt'))")
+print("call by it.next()")
+print("also, Generator expressions can be composed by passing the iterator from one generator expression into the for subexpression of another.")
+print(" i.e -- you can chain them")
 
 # Item 10 ...
-print "====ITEM Item 10: Prefer enumerate Over range ===="
+print("====ITEM Item 10: Prefer enumerate Over range ====")
 
-print "like range, but gives you a tuple with position"
-print "range(10) vs enumerate(10) vs enumerate(10,1)"
-print range(10)
-print list(enumerate(range(10)))
-print list(enumerate(range(10),1))
+print("like range, but gives you a tuple with position")
+print("range(10) vs enumerate(10) vs enumerate(10,1)")
+print(list(range(10)))
+print(list(enumerate(range(10))))
+print(list(enumerate(list(range(10)),1)))
 
 
 # Item 11 ...
-print "====ITEM 11: Use zip to Process Iterators in Parallel ===="
+print("====ITEM 11: Use zip to Process Iterators in Parallel ====")
 
-print "two or more iterators can be processed in parallel"
-print "in python output is full, in 3 gives an iterator"
-print zip(enumerate(range(10)), enumerate(range(10), 1))
+print("two or more iterators can be processed in parallel")
+print("in python output is full, in 3 gives an iterator")
+print(list(zip(enumerate(range(10)), enumerate(list(range(10)), 1))))
 
 # Item 12 ...
-print "====ITEM 12 Avoid else Blocks After for and while Loops ===="
+print("====ITEM 12 Avoid else Blocks After for and while Loops ====")
 
-print "this is stylistic, but valid -- not many people know this"
-print "this else should be called 'nobreak' "
+print("this is stylistic, but valid -- not many people know this")
+print("this else should be called 'nobreak' ")
 
 # Item 13 ...
-print "====ITEM 13: Take Advantage of Each Block in try/except/else/finally ===="
+print("====ITEM 13: Take Advantage of Each Block in try/except/else/finally ====")
 
-print "stylistic"
-print "try:"
-print " something"
-print "except Exception as e:"
-print " handle exception"
-print "else:"
-print " no exception, was ok"
-print "finally:"
-print " no matter what run this"
+print("stylistic")
+print("try:")
+print(" something")
+print("except Exception as e:")
+print(" handle exception")
+print("else:")
+print(" no exception, was ok")
+print("finally:")
+print(" no matter what run this")
 
-print "not sure I agree with the else clause here"
+print("not sure I agree with the else clause here")
 
 # Item 14 ...
-print "====ITEM 14: Prefer Exceptions to Returning None===="
+print("====ITEM 14: Prefer Exceptions to Returning None====")
 
-print "This means 'don't bury exceptions -- let the caller deal with it"
+print("This means 'don't bury exceptions -- let the caller deal with it")
 
 
 def foo(a,b):
     try:
         rtn = a/b
     except ZeroDivisionError as e:
-        print ">" + str(e) + "< This is the exception you should reraise, i.e 'raise e'"
+        print(">" + str(e) + "< This is the exception you should reraise, i.e 'raise e'")
     else:
         return rtn
 
 foo(4,0)
 
 # Item __ ...
-print "====ITEM _ -- ===="
+print("====ITEM _ -- ====")
 
-print "..."
-print "..."
+print("...")
+print("...")
 
 matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 flat = [x for row in matrix for x in row]
-print flat
+print(flat)
 
 matrix1 = [(1, 2, 3), (4, 5, 6), (7, 8, 9)]
 flat1 = [x[0] for x in matrix1]
-print flat1
+print(flat1)
 
 def pop(x):
-    print x
+    print(x)
 
 
 def sort_priority(values, group):

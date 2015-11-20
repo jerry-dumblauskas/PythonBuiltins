@@ -9,7 +9,7 @@ def check_it(in_lst):
 
     st_val = in_lst[0]
     half_pt = len(in_lst)/2
-    half_val = in_lst[half_pt]
+    half_val = in_lst[int(half_pt)]
 
     # final exit point -- when 2 items are left in the list
     if len(in_lst) <= 2:
@@ -17,9 +17,9 @@ def check_it(in_lst):
 
     # Slicing logic, keep cutting down till 2 points are left
     if half_val == half_pt + st_val:
-        rtn = check_it(in_lst[half_pt:])
+        rtn = check_it(in_lst[int(half_pt):])
     else:
-        rtn = check_it(in_lst[:half_pt + 1])
+        rtn = check_it(in_lst[:int(half_pt) + 1])
     return rtn
 
 
@@ -27,8 +27,8 @@ if __name__ == "__main__":
 
     x = [0,2,3,4,5,6,7,8, 9,10]
     assert  check_it(x) == 1
-    print check_it(x)
-    x = range(100)
+    print(check_it(x))
+    x = list(range(100))
     x.remove(0)
-    print x
-    print check_it(x)
+    print(x)
+    print(check_it(x))
