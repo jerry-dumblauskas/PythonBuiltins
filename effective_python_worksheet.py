@@ -122,12 +122,27 @@ print " no matter what run this"
 
 print "not sure I agree with the else clause here"
 
+# Item 14 ...
+print "====ITEM 14: Prefer Exceptions to Returning None===="
+
+print "This means 'don't bury exceptions -- let the caller deal with it"
+
+
+def foo(a,b):
+    try:
+        rtn = a/b
+    except ZeroDivisionError as e:
+        print ">" + str(e) + "< This is the exception you should reraise, i.e 'raise e'"
+    else:
+        return rtn
+
+foo(4,0)
+
 # Item __ ...
 print "====ITEM _ -- ===="
 
 print "..."
 print "..."
-
 
 matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 flat = [x for row in matrix for x in row]
