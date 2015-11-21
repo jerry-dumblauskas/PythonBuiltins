@@ -138,23 +138,10 @@ def foo(a,b):
 
 foo(4,0)
 
-# Item __ ...
-print("====ITEM _ -- ====")
+# Item 15 ...
+print("====ITEM 15: Know How Closures Interact with Variable Scope ====")
 
-print("...")
-print("...")
-
-matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-flat = [x for row in matrix for x in row]
-print(flat)
-
-matrix1 = [(1, 2, 3), (4, 5, 6), (7, 8, 9)]
-flat1 = [x[0] for x in matrix1]
-print(flat1)
-
-def pop(x):
-    print(x)
-
+print("in below functions 'helper' can see group")
 
 def sort_priority(values, group):
     def helper(x):
@@ -162,14 +149,30 @@ def sort_priority(values, group):
             return (0,x)
         return (1,x)
     values.sort(key=helper)
+numbers = [8, 3, 1, 2, 5, 4, 7, 6]
+group = {2, 3, 5, 7}
+sort_priority(numbers, group)
+print(numbers)
 
-
+print("helper function using py3 idiom nonlocal, so we can assign inside a function")
 def sort_priority2(values, group):
-    found = [False]
+    found = False
     def helper1(x):
+        nonlocal found
         if x in group:
-            found[0] = True
+            found = True
             return (0,x)
         return (1,x)
     values.sort(key=helper1)
-    return found[0]
+    return found
+
+found = sort_priority2(numbers, group)
+print('Found:', found)
+print(numbers)
+# Item __ ...
+print("====ITEM _ -- ====")
+
+print("...")
+print("...")
+
+
