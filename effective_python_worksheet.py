@@ -169,10 +169,32 @@ def sort_priority2(values, group):
 found = sort_priority2(numbers, group)
 print('Found:', found)
 print(numbers)
+# Item 25 ...
+print("====ITEM  25: Initialize Parent Classes with super ====")
+
+print("use super -- it defines a mro and ensures things run only once")
+print("note -- the __class__ idiom for python 3 is not working as described in the book -- gotta check that out")
+
+
+class MyBaseClass(object):
+    def __init__(self, value):
+        self.value = value
+
+
+class Explicit(MyBaseClass):
+    def __init__(self, value):
+        super(Explicit, self).__init__(value * 2)
+
+
+class Implicit(MyBaseClass):
+    def __init__(self, value):
+        super().__init__(value * 2)
+
+assert Explicit(10).value == Implicit(10).value
+
 # Item __ ...
 print("====ITEM _ -- ====")
 
 print("...")
 print("...")
-
 
