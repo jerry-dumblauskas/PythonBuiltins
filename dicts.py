@@ -24,3 +24,17 @@ if 'z' in main_dict:
     print(("true"))
 else:
     print (("false"))
+
+'''
+recipe 3 -- sets are important also!
+'''
+lst=[1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10]
+m_set = set(lst)
+print (lst)
+print (m_set)
+another_set={4,5,6,7}
+
+print (m_set.intersection(another_set))
+print (m_set & another_set)
+print (m_set.union(another_set))
+print (m_set | another_set)
