@@ -5,7 +5,7 @@ p = zip(mn_list,mx_list)
 print ("zip output -- a list of tuples")
 print (p)
 
-print ("wrap syntax -- if you call a function with a *x, it is an iterable that will be uppacked, into the function")
+print ("wrap syntax -- if you call a function with a *x, it is an iterable that will be unpacked, into the function")
 print ("if it is in the func arg list, the values will be wrapped into a tuple")
 lst = [1,2]
 
