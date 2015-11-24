@@ -169,6 +169,23 @@ def sort_priority2(values, group):
 found = sort_priority2(numbers, group)
 print('Found:', found)
 print(numbers)
+
+
+# Item 19 ...
+print("====ITEM 19: Provide Optional Behavior with Keyword Arguments ====")
+
+print("advantages: The first advantage is that keyword arguments make the function call clearer to new readers of the code")
+print("also provides a default (just watch for the mutable trap")
+
+def foo(x=1,y=3):
+    return x+y
+
+print (foo())
+print (foo(1,3))
+print (foo(x=4,y=0))
+print (foo(y=6, x= -2))
+
+
 # Item 25 ...
 print("====ITEM  25: Initialize Parent Classes with super ====")
 
