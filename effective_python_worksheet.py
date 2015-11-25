@@ -186,6 +186,39 @@ print (foo(x=4,y=0))
 print (foo(y=6, x= -2))
 
 
+# Item 20 ...
+print("====ITEM 20: Use None and Docstrings to Specify Dynamic Default Arguments ====")
+
+print("remember -- this is the default list idiom == the default arg value is evauated at module def time")
+print("so, for a list, that is one object, and if you call it 20 times with the default, it will us the same object")
+print("also, document this in a doc string")
+
+
+def my_bad(x=2, lst=[]):
+    lst.append(x)
+    return lst
+
+print (my_bad(1))
+print (my_bad(2))
+print ("1 shouldn't be there!")
+
+
+def my_good(x=2, lst=None):
+    """
+    A better example
+    :param x: item to be listed
+    :param lst: the list to add to, if None create a new list
+    :return: the listed variable
+    """
+    lst = lst or []
+    lst.append(x)
+    return lst
+
+print (my_good(1))
+print (my_good(2))
+print ("1 isn't there!")
+
+
 # Item 25 ...
 print("====ITEM  25: Initialize Parent Classes with super ====")
 
