@@ -170,6 +170,49 @@ found = sort_priority2(numbers, group)
 print('Found:', found)
 print(numbers)
 
+# Item 16 ...
+print("====ITEM 16: Consider Generators Instead of Returning Lists ====")
+
+print("for large datasets -- generators are the way to go")
+print("also reduces visual noise")
+
+
+def index_words(text):
+    result = []
+    if text:
+        result.append(0)
+    for index, letter in enumerate(text):
+        if letter == ' ':
+            result.append(index + 1)
+    return result
+address = 'Four score and seven years ago...'
+result = index_words(address)
+print(result[:3])
+
+
+def index_words_iter(text):
+    if text:
+        yield 0
+    for index, letter in enumerate(text):
+        if letter == ' ':
+            yield index + 1
+result = list(index_words_iter(address))
+print(result[:3])
+
+
+# Item 17 ...
+print("====ITEM _ -- ====")
+
+print("...")
+print("...")
+
+
+# Item 18 ...
+print("====ITEM _ -- ====")
+
+print("...")
+print("...")
+
 
 # Item 19 ...
 print("====ITEM 19: Provide Optional Behavior with Keyword Arguments ====")
