@@ -201,18 +201,69 @@ print(result[:3])
 
 
 # Item 17 ...
-print("====ITEM _ -- ====")
+print("====ITEM 17: Be Defensive When Iterating Over Arguments ====")
 
-print("...")
-print("...")
+print("You can easily define your own iterable container type by implementing the __iter__ method as a generator.")
+print("the big picture here is that an iterator can be exhausted in a method, it can be used only once")
+
+
+def issue(m_iter):
+    """
+    iterable will work, iterator, not so much
+    :param m_iter: iterable
+    :return: indeed, what will we return?
+    """
+    print (sum(m_iter))
+    rtn = []
+    for x in m_iter:
+        rtn.append(x)
+    return rtn
+
+
+def m_iterator():
+    for i in range(6):
+        yield i
+
+print ("This won't work")
+lst=[0,1,2,3,4,5]
+print (issue(lst))
+print (issue(m_iterator()))
+
+
+class wrap_generator_in_an_iterable(object):
+    """
+    wrapping class container that creates a new generator on each call
+    :return: new container class
+    """
+    def __init__(self):
+        pass
+
+    def __iter__(self):
+        return m_iterator()
+
+
+print ("This will work says Bruce")
+print (issue(lst))
+print (issue(wrap_generator_in_an_iterable()))
 
 
 # Item 18 ...
-print("====ITEM _ -- ====")
+print("====ITEM  18: Reduce Visual Noise with Variable Positional Arguments ====")
 
-print("...")
-print("...")
+print("this is just using *args, i.e wrap in a tuple from basics.py")
 
+
+def wrap_in_a_tuple(*args):
+    for x in args:
+        print (x)
+
+a=1
+b=2
+c=3
+d=4
+
+wrap_in_a_tuple(a,b,c)
+wrap_in_a_tuple(a,b,c,d)
 
 # Item 19 ...
 print("====ITEM 19: Provide Optional Behavior with Keyword Arguments ====")
