@@ -2,9 +2,9 @@ My notes on the diffs I am hitting going from 2 to 3
 (good site for more is at http://www.diveintopython3.net/porting-code-to-python-3-with-2to3.html )
 
 Things I've run into:
-1) print                            [seen this for years]
+1) print                                [seen this for years]
 2) zip is an iterator
 3) iteritems is gone from dict
-4) iterator.next() is now __next__()  [pep 3114  https://www.python.org/dev/peps/pep-3114/]
+4) iterator.next() is now __next__()    [pep 3114  https://www.python.org/dev/peps/pep-3114/]
 5) range is an iterable
 6)
