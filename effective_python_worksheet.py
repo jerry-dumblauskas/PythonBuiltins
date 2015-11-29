@@ -313,6 +313,39 @@ print (my_good(2))
 print ("1 isn't there!")
 
 
+# Item 21 ...
+print("====ITEM 21: Enforce Clarity with Keyword-Only Arguments ====")
+
+print("in python3, you can force args to be called with a keyword")
+print("below, the safe div function uses a * to say 'after this only keywords, ie, can't cheat and use positional")
+def safe_division_c(number, divisor, *,
+                    ignore_overflow=False,
+                    ignore_zero_division=False):
+
+    try:
+            return number / divisor
+    except OverflowError:
+        if ignore_overflow:
+            return 0
+        else:
+            raise
+    except ZeroDivisionError:
+        if ignore_zero_division:
+            return float('inf')
+        else:
+            raise
+
+try:
+    safe_division_c(1, 10**500, True, False)
+except Exception as e:
+    print (e)
+
+print (safe_division_c(1, 0, ignore_zero_division=True))
+print (safe_division_c(1, 1))
+print (safe_division_c(1, 2, ignore_zero_division=True))
+
+
+
 # Item 25 ...
 print("====ITEM  25: Initialize Parent Classes with super ====")
 
