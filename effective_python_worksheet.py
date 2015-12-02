@@ -345,6 +345,74 @@ print (safe_division_c(1, 1))
 print (safe_division_c(1, 2, ignore_zero_division=True))
 
 
+# Item 22 ...
+print("====ITEM 22: Prefer Helper Classes Over Bookkeeping with Dictionaries and Tuples ====")
+
+print("if you need too many lists and dicts in a single class, refactor the complexity out with helper classes")
+print("...")
+
+
+class WeightedGradebook(object):
+    # ...
+    def report_grade(self, name, subject, score, weight):
+        by_subject = self._grades[name]
+        grade_list = by_subject.setdefault(subject, [])
+        grade_list.append((score, weight))
+
+    def average_grade(self, name):
+        by_subject = self._grades[name]
+        score_sum, score_count = 0, 0
+        for subject, scores in by_subject.items():
+           subject_avg, total_weight = 0, 0
+           for score, weight in scores:
+               pass
+        return score_sum / score_count
+
+print (" vs .. ")
+
+import collections
+Grade = collections.namedtuple('Grade', ('score', 'weight'))
+
+
+class Subject(object):
+    def __init__(self):
+        self._grades = []
+
+    def report_grade(self, score, weight):
+        self._grades.append(Grade(score, weight))
+
+    def average_grade(self):
+        total, total_weight = 0, 0
+        for grade in self._grades:
+            total += grade.score * grade.weight
+
+
+class Student(object):
+    def __init__(self):
+        self._subjects = {}
+
+    def subject(self, name):
+        if name not in self._subjects:
+            self._subjects[name] = Subject()
+        return self._subjects[name]
+
+    def average_grade(self):
+        total, count = 0, 0
+        for subject in self._subjects.values():
+            total += subject.average_grade()
+            count += 1
+        return total / count
+
+
+class Gradebook(object):
+    def __init__(self):
+        self._students = {}
+
+    def student(self, name):
+        if name not in self._students:
+            self._students[name] = Student()
+        return self._students[name]
+
 
 # Item 25 ...
 print("====ITEM  25: Initialize Parent Classes with super ====")
@@ -370,8 +438,19 @@ class Implicit(MyBaseClass):
 assert Explicit(10).value == Implicit(10).value
 
 # Item __ ...
-print("====ITEM _ -- ====")
+print("====ITEM  ====")
 
 print("...")
 print("...")
 
+# Item __ ...
+print("====ITEM  ====")
+
+print("...")
+print("...")
+
+# Item __ ...
+print("====ITEM  ====")
+
+print("...")
+print("...")
