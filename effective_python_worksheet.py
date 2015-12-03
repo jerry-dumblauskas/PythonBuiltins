@@ -413,6 +413,20 @@ class Gradebook(object):
             self._students[name] = Student()
         return self._students[name]
 
+# Item 23 ...
+print("====ITEM 23: Accept Functions for Simple Interfaces Instead of Classes ====")
+
+print("use small functions instead of classes when passing in parameters")
+names = ['Socrates', 'Archimedes', 'Plato', 'Aristotle']
+names.sort(key=lambda x: len(x))
+print(names)
+print ("no need for a class in the above")
+
+# Item 24 ...
+print("====ITEM Use @classmethod Polymorphism to Construct Objects Generically ====")
+
+print("This is hard to demo -- but ")
+print("...")
 
 # Item 25 ...
 print("====ITEM  25: Initialize Parent Classes with super ====")
@@ -443,14 +457,5 @@ print("====ITEM  ====")
 print("...")
 print("...")
 
-# Item __ ...
-print("====ITEM  ====")
 
-print("...")
-print("...")
 
-# Item __ ...
-print("====ITEM  ====")
-
-print("...")
-print("...")
