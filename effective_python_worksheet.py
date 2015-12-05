@@ -425,8 +425,28 @@ print ("no need for a class in the above")
 # Item 24 ...
 print("====ITEM Use @classmethod Polymorphism to Construct Objects Generically ====")
 
-print("This is hard to demo -- but ")
-print("...")
+print("The below class can be constructed in many ways ")
+class MyData:
+    def __init__(self, data):
+        "Initialize MyData from a sequence"
+        self.data = data
+
+    @classmethod
+    def fromfilename(cls, filename):
+        "Initialize MyData from a file"
+        data = open(filename).readlines()
+        return cls(data)
+
+    @classmethod
+    def fromdict(cls, datadict):
+        "Initialize MyData from a dict's items"
+        return cls(datadict.items())
+
+myD1 = MyData([1,2,3])
+print (myD1.data)
+myD1 = MyData.fromdict({1:'one', 2:'two'})
+print (myD1.data)
+
 
 # Item 25 ...
 print("====ITEM  25: Initialize Parent Classes with super ====")
