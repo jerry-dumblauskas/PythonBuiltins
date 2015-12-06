@@ -472,10 +472,33 @@ class Implicit(MyBaseClass):
 assert Explicit(10).value == Implicit(10).value
 
 # Item __ ...
+print("====ITEM 26: Use Multiple Inheritance Only for Mix-in Utility Classes ====")
+
+print("mi sucks -- but mixins are ok")
+print("mixin is like adding a static set of functionality into a class")
+
+class BogusMixin(object):
+    def send_to_space(self):
+        print ("blast off")
+
+
+class MyParent(object):
+    def __init__(self):
+        pass
+
+
+class Boring(MyParent, BogusMixin):
+    def __init__(self, data):
+        self.data = data
+
+    def do_work(self):
+        self.send_to_space()
+
+b = Boring(77)
+print (b.do_work())
+
+# Item __ ...
 print("====ITEM  ====")
 
 print("...")
 print("...")
-
-
-
