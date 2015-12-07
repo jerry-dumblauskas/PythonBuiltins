@@ -471,7 +471,7 @@ class Implicit(MyBaseClass):
 
 assert Explicit(10).value == Implicit(10).value
 
-# Item __ ...
+# Item 26 ...
 print("====ITEM 26: Use Multiple Inheritance Only for Mix-in Utility Classes ====")
 
 print("mi sucks -- but mixins are ok")
@@ -496,6 +496,32 @@ class Boring(MyParent, BogusMixin):
 
 b = Boring(77)
 print (b.do_work())
+
+# Item 27 ...
+print("====ITEM 27: Prefer Public Attributes Over Private Ones ====")
+
+print("a __ in front of a var makes it private")
+print("we are all consenting adults -- let's not do this")
+class MyClass(object):
+    def __init__(self):
+        self.__s=9
+
+try:
+    mc = MyClass()
+    print (mc.__s)
+except Exception as e:
+    print ("exception is:" + str(e))
+
+print ("see!  but you can work around this with a _Class in fromt")
+mc = MyClass()
+print (mc._MyClass__s)
+
+# Item __ ...
+print("====ITEM  ====")
+
+print("...")
+print("...")
+
 
 # Item __ ...
 print("====ITEM  ====")
