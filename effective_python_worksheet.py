@@ -516,12 +516,26 @@ print ("see!  but you can work around this with a _Class in fromt")
 mc = MyClass()
 print (mc._MyClass__s)
 
+# Item 28 ...
+print("====ITEM 28: Inherit from collections.abc for Custom Container Types ====")
+
+print("you can just inherit from list....but if you don't want to do that")
+print("the abc tells you what you need implement, and gives some scaffolding")
+from collections.abc import Sequence
+
+class BadType(Sequence):
+    def __getitem__(self, item):
+        "just need to impl this"
+    def __len__(self):
+        "and this..."
+
+foo = BadType()
+
 # Item __ ...
 print("====ITEM  ====")
 
 print("...")
 print("...")
-
 
 # Item __ ...
 print("====ITEM  ====")
