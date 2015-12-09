@@ -531,6 +531,36 @@ class BadType(Sequence):
 
 foo = BadType()
 
+# Item 29 ...
+print("====ITEM 29: Use Plain Attributes Instead of Get and Set Methods ====")
+
+print("Don't do java -- and if you want some control, use @property to add logic, like so")
+class Resistor(object):
+    def __init__(self, ohms):
+        self.ohms = ohms
+        self.voltage = 0
+        self.current = 0
+
+class BoundedResistance(Resistor):
+    def __init__(self, ohms):
+        super().__init__(ohms)
+
+    @property
+    def ohms(self):
+        return self._ohms
+
+    @ohms.setter
+    def ohms(self, ohms):
+        if ohms <= 0:
+            raise ValueError('%f ohms must be > 0' % ohms)
+        self._ohms = ohms
+try:
+    r3 = BoundedResistance(1e3)
+    r3.ohms = 0
+except ValueError as e:
+    print (e)
+
+
 # Item __ ...
 print("====ITEM  ====")
 
