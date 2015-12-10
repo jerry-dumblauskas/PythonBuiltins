@@ -561,11 +561,52 @@ except ValueError as e:
     print (e)
 
 
-# Item __ ...
-print("====ITEM  ====")
+# Item 30 ...
+print("====ITEM 30: Consider @property Instead of Refactoring Attributes ====")
 
+print("@property is a tool to help you address problems you’ll come across in real-world code.")
+print ("Don’t overuse it. When you find yourself repeatedly extending @property methods, it’s ")
+print ("probably time to refactor your class instead of further paving over your code’s poor design.")
 print("...")
-print("...")
+
+
+class Poop(object):
+    def __init__(self, initial_cash=0):
+        self.__cash = initial_cash
+
+    def get_cash(self, amount):
+        if amount <= self.__cash:
+            self.__cash -= amount
+            return amount
+
+p = Poop(100)
+print (p.get_cash(33))
+print (p.get_cash(99))
+
+print ("with a @property")
+
+
+class Poop1(object):
+    def __init__(self, initial_cash=0):
+        self.__cash = initial_cash
+
+    @property
+    def cash(self):
+        return self.__cash
+
+    @cash.setter
+    def cash(self, amount):
+        self.__cash = self.__cash + amount
+
+    def get_cash(self, amount):
+        if amount <= self.__cash:
+            self.__cash -= amount
+            return amount
+
+p = Poop1(100)
+print (p.get_cash(33))
+p.cash = 55
+print (p.get_cash(99))
 
 # Item __ ...
 print("====ITEM  ====")
