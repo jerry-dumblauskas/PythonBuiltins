@@ -608,6 +608,41 @@ print (p.get_cash(33))
 p.cash = 55
 print (p.get_cash(99))
 
+# Item 31 ...
+print("====ITEM 31: Use Descriptors for Reusable @property Methods ====")
+
+print("Define any of these methods and an object is considered a descriptor and can override default behavior upon being looked up as an attribute.")
+print("this example also uses weakkey (for memory leaks")
+print ("descriptors are more generic and resuable then @prop")
+from weakref import WeakKeyDictionary
+
+class Grade(object):
+    def __init__(self):
+        self._values = WeakKeyDictionary()
+
+    def __get__(self, instance, instance_type):
+        return self._values.get(instance, 0)
+
+    def __set__(self, instance, value):
+        if not (0 <= value <= 100):
+            raise ValueError('Grade must be between 0 and 100')
+        self._values[instance] = value
+
+class Exam(object):
+    # Class attributes
+    math_grade = Grade()
+    writing_grade = Grade()
+    science_grade = Grade()
+
+exam = Exam()
+exam.writing_grade = 99
+exam1 = Exam()
+exam1.writing_grade = 100
+
+print (exam.writing_grade)
+print (exam1.writing_grade)
+
+
 # Item __ ...
 print("====ITEM  ====")
 
