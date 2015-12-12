@@ -643,8 +643,54 @@ print (exam.writing_grade)
 print (exam1.writing_grade)
 
 
+# Item 32 ...
+print("====ITEM Use __getattr__, __getattribute__, and __setattr__ for Lazy Attributes ====")
+
+print("If your class defines __getattr__, that method is called every time an attribute can’t be found in an object’s instance dictionary.")
+print("__getattribute__. This special method is called every time an attribute is accessed on an object, even in cases where it does exist in the attribute dictionary.")
+print ("The __setattr__ method is always called every time an attribute is assigned on an instance (either directly or through the setattr built-in function).")
+
+
+class LazyDB(object):
+    def __init__(self):
+        self.exists = 5
+
+    def __getattr__(self, name):
+        value = 'Value for %s' % name
+        print ("see called only once")
+        setattr(self, name, value)
+        return value
+
+g = LazyDB()
+
+print ("g is:" , g.__dict__)
+print ("g foo is:", g.foo)
+print ("g foo is(again):", g.foo)
+
+class ValidatingDB(object):
+    def __init__(self):
+        self.exists = 5
+
+    def __getattribute__(self, name):
+        print('Called __getattribute__(%s)' % name)
+        try:
+            return super().__getattribute__(name)
+        except AttributeError:
+            value = 'Value for %s' % name
+            setattr(self, name, value)
+            return value
+
+data = ValidatingDB()
+print('exists:', data.exists)
+print('foo:   ', data.foo)
+print('foo:   ', data.foo)
+
+print ("NOTE -- get_attribute and setattr are called on each access -- you can get caught in a infinite loop")
+print ("use super to break it")
+
 # Item __ ...
 print("====ITEM  ====")
 
 print("...")
 print("...")
+
