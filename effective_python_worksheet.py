@@ -688,9 +688,40 @@ print('foo:   ', data.foo)
 print ("NOTE -- get_attribute and setattr are called on each access -- you can get caught in a infinite loop")
 print ("use super to break it")
 
+# Item 33 ...
+print("====ITEM 33: Validate Subclasses with Metaclasses ====")
+
+print("Use metaclasses to ensure that subclasses are well formed at the time they are defined, before objects")
+print ("of their type are constructed.")
+
+
+class Meta(type):
+    def __new__(meta, name, bases, class_dict):
+        print((meta, name, bases, class_dict))
+        if class_dict.get('stuff') != 124:
+            print ("this could fail if we want")
+        return type.__new__(meta, name, bases, class_dict)
+
+class MyClass(object, metaclass=Meta):
+    stuff = 123
+
+    def __init__(self):
+        print ("in the class init")
+
+
+pu = MyClass()
+
+# Item 34 ...
+print("====ITEM 34: Register Class Existence with Metaclasses ====")
+
+print("Class registration is a helpful pattern for building modular Python programs.")
+print("34 is the same as 33, but here you can call a method (instead of, or in addition to, a ")
+print ("validation check) to register the class for a cache or a lookup")
+
 # Item __ ...
 print("====ITEM  ====")
+print("....")
 
-print("...")
-print("...")
-
+# Item __ ...
+print("====ITEM  ====")
+print("....")
