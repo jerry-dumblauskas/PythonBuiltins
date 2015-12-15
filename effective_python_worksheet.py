@@ -786,6 +786,44 @@ print('After: ', repr(foo.first_name), foo.__dict__)
 print ("only issue is the meta needs to know about the field object -- not sure I like that")
 
 
+# Item 36 ...
+print("====ITEM 36: Use subprocess to Manage Child Processes ====")
+print("subprocess is a builtin module")
+
+print ("run a simple subprocess -- blocking")
+import subprocess
+proc = subprocess.Popen(['echo', 'go home'], stdout=subprocess.PIPE)
+out, err = proc.communicate()
+print (out)
+proc = subprocess.Popen(['ps'], stdout=subprocess.PIPE)
+out, err = proc.communicate()
+print (proc.pid)
+
+print ("run a simple subprocess -- nonblocking")
+proc = subprocess.Popen(['sleep', '.1'])
+while proc.poll() is None:
+    pass
+    #print ("lots of work")
+print ("exit status...", proc.poll())
+
+print ("run a bunch in parallel")
+def run_sleep(per):
+    proc = subprocess.Popen(['sleep', per])
+    return proc
+from time import time
+start = time()
+procs=[]
+for _ in range(10):
+    proc = run_sleep('.1')
+    procs.append(proc)
+
+for proc in procs:
+    proc.communicate()
+    print (proc.pid)
+end = time()
+print('Finished in %.3f seconds' % (end - start))
+
+
 # Item __ ...
 print("====ITEM  ====")
 print("....")
