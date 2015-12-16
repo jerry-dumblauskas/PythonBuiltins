@@ -824,6 +824,41 @@ end = time()
 print('Finished in %.3f seconds' % (end - start))
 
 
+# Item 37 ...
+print("====ITEM 37: Use Threads for Blocking I/O, Avoid for Parallelism ====")
+print("thi gil!!  But if you have system io, try threads")
+import select
+from threading import Thread
+
+
+def slow_select():
+    select.select([], [], [], .1)
+
+start = time()
+for _ in range(5):
+    slow_select()
+end = time()
+print('Took %.3f seconds' % (end - start))
+
+start = time()
+threads = []
+for _ in range(5):
+    thread = Thread(target=slow_select)
+    thread.start()
+    threads.append(thread)
+for thread in threads:
+    thread.join()
+end = time()
+print('using IO Took %.3f seconds' % (end - start))
+
+# Item __ ...
+print("====ITEM  ====")
+print("....")
+
+# Item __ ...
+print("====ITEM  ====")
+print("....")
+
 # Item __ ...
 print("====ITEM  ====")
 print("....")
