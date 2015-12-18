@@ -898,6 +898,28 @@ run_threads(worker, how_many, counter)
 print('Counter should be %d, found %d' %
       (5 * how_many, counter.count))
 
+# Item 39 ...
+print("====ITEM 39: Use Queue to Coordinate Work Between Threads ====")
+print("queue is more efficient that doing it yourself")
+
+from queue import Queue
+
+q = Queue()
+
+def consumer():
+    print("start consumer")
+    q.get()
+    print("consumer done")
+
+t = Thread(target=consumer)
+t.start()
+import time
+time.sleep(4)
+print("producer putting")
+q.put("fff")
+thread.join()
+print("producer done")
+
 # Item __ ...
 print("====ITEM  ====")
 print("....")
