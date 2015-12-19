@@ -920,9 +920,15 @@ q.put("fff")
 thread.join()
 print("producer done")
 
-# Item __ ...
-print("====ITEM  ====")
+# Item 40 ...
+print("====ITEM 40: Consider Coroutines to Run Many Functions Concurrently ====")
 print("....")
+
+# Item 56 ...
+print("====ITEM 56: Test Everything with unittest ====")
+print("this is so self explanatory :) -- no code needed")
+print ("oh, but use mock")
+
 
 # Item __ ...
 print("====ITEM  ====")
