@@ -922,7 +922,24 @@ print("producer done")
 
 # Item 40 ...
 print("====ITEM 40: Consider Coroutines to Run Many Functions Concurrently ====")
-print("....")
+print("somewhat related to generators -- the yield can be assigned a value and called by the .send")
+print("can chain these together and mimic threads")
+def minimize():
+    print ("start")
+    current = yield
+    print ("end")
+    print ('current', current)
+    while True:
+        print ("in loop")
+        value = yield current
+        print ('value', value)
+        current = min(value, current)
+
+it = minimize()
+next(it)
+print(it.send(33))
+print(it.send(44))
+
 
 # Item 56 ...
 print("====ITEM 56: Test Everything with unittest ====")
