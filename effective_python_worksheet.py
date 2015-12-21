@@ -941,6 +941,38 @@ print(it.send(33))
 print(it.send(44))
 
 
+# Item 41 ...
+print("====ITEM 41: Consider concurrent.futures for True Parallelism ====")
+print("this is the multiprocessing module")
+
+def gcd(pair):
+    '''
+    greatist common divisor
+    :param pair: tuple of ints
+    :return: int
+    '''
+    a, b = pair
+    low = min(a, b)
+    for i in range(low, 0, -1):
+        if a % i == 0 and b % i == 0:
+            return i
+
+numbers = [(1963309, 2265973), (2030677, 3814172),
+           (1551645, 2229620), (2039045, 2020802)]
+from time import time
+start = time()
+results = list(map(gcd, numbers))
+end = time()
+print('Took %.3f seconds' % (end - start))
+
+print("using multiprocessing...")
+from concurrent.futures import  ProcessPoolExecutor
+start = time()
+pool = ProcessPoolExecutor(max_workers=2)  # The one change
+results = list(pool.map(gcd, numbers))
+end = time()
+print('Took %.3f seconds' % (end - start))
+
 # Item 56 ...
 print("====ITEM 56: Test Everything with unittest ====")
 print("this is so self explanatory :) -- no code needed")
