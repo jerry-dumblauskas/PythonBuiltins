@@ -973,6 +973,52 @@ results = list(pool.map(gcd, numbers))
 end = time()
 print('Took %.3f seconds' % (end - start))
 
+
+# Item 42 ...
+print("====ITEM 42: Define Function Decorators with functools.wraps ====")
+print("func tools!!")
+
+
+def my_dec(func):
+    def wrapper():
+        print("in wrapper")
+        return func()
+
+    return wrapper
+
+
+@my_dec
+def youza():
+    print("in youza")
+
+
+print("calling youza")
+youza()
+print("here is the issue, the func object has been renamed!!")
+print(youza)
+
+
+from functools import wraps
+
+def my_dec(func):
+    @wraps(func)
+    def wrapper():
+        print("in wrapper")
+        return func()
+
+    return wrapper
+
+@my_dec
+def youza():
+    print("in youza")
+
+
+print("calling youza")
+youza()
+print("here is the FIXED issue, the func object has NOT been renamed!!")
+print(youza)
+
+
 # Item 56 ...
 print("====ITEM 56: Test Everything with unittest ====")
 print("this is so self explanatory :) -- no code needed")
