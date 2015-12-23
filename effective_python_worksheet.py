@@ -1019,6 +1019,54 @@ print("here is the FIXED issue, the func object has NOT been renamed!!")
 print(youza)
 
 
+# Item 43 ...
+print("====ITEM 43: Consider contextlib and with Statements for Reusable try/finally Behavior ====")
+print("no need to handle the __enter__ and __exit__")
+from contextlib import  contextmanager
+import logging
+
+
+def my_function():
+    logging.debug('Some debug data')
+    logging.error('Error log here')
+    logging.debug('More debug data')
+
+print ("default is error")
+my_function()
+
+
+@contextmanager
+def logging_level(level):
+    logger = logging.getLogger()
+    old_level = logger.getEffectiveLevel()
+    logger.setLevel(level)
+    try:
+        yield
+    finally:
+        logger.setLevel(old_level)
+
+print ('with a context wrapping')
+with logging_level(logging.DEBUG):
+    print('Inside:')
+    my_function()
+
+print("can also set to use with a 'with'")
+
+
+@contextmanager
+def log_level(level, name):
+    logger = logging.getLogger(name)
+    old_level = logger.getEffectiveLevel()
+    logger.setLevel(level)
+    try:
+        yield logger
+    finally:
+        logger.setLevel(old_level)
+
+with log_level(logging.DEBUG, 'my-log') as logger:
+    logger.debug('This is my message!')
+    logging.debug('This will not print')
+
 # Item 56 ...
 print("====ITEM 56: Test Everything with unittest ====")
 print("this is so self explanatory :) -- no code needed")
