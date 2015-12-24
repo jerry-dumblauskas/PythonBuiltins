@@ -1067,12 +1067,109 @@ with log_level(logging.DEBUG, 'my-log') as logger:
     logger.debug('This is my message!')
     logging.debug('This will not print')
 
+
+# Item 44 ...
+print("====ITEM 44: Make pickle Reliable with copyreg ====")
+print("Use the copyreg built-in module with pickle to add missing attribute values,")
+print("allow versioning of classes, and provide stable import paths.")
+
+class GameState(object):
+    def __init__(self):
+        self.level = 0
+        self.lives = 4
+import pickle
+
+state = GameState()
+state_path = '/tmp/game_state.bin'
+with open(state_path, 'wb') as f:
+    pickle.dump(state, f)
+
+with open(state_path, 'rb') as f:
+    pic = pickle.load(f)
+print(pic.__dict__)
+print ("now to use copyreg")
+
+class GameState(object):
+    def __init__(self, level=0, lives=4, points=0):
+        self.level = level
+        self.lives = lives
+        self.points = points
+
+
+def pickle_game_state(game_state):
+    kwargs = game_state.__dict__
+    return unpickle_game_state, (kwargs,)
+
+
+def unpickle_game_state(kwargs):
+    return GameState(**kwargs)
+
+
+import copyreg
+print("set the pickle constructor to an object type")
+copyreg.pickle(GameState, pickle_game_state)
+state = GameState()
+with open(state_path, 'wb') as f:
+    pickle.dump(state, f)
+
+print("change the object type")
+
+
+class GameState(object):
+    def __init__(self, level=0, lives=4, points=0):
+        self.level = level
+        self.lives = lives
+        self.points = points
+        self.garbage = 999
+
+print("reload from the previous object")
+with open(state_path, 'rb') as f:
+    pic = pickle.load(f)
+
+print(pic.__dict__)
+
+# Item 45 ...
+print("====ITEM 45: Use datetime Instead of time for Local Clocks ====")
+print("Avoid using the time module for translating between different time zones.")
+print("Use the datetime built-in module along with the pytz module to reliably convert between times in different time zones.")
+print("Always represent time in UTC and do conversions to local time as the final step before presentation.")
+
+from datetime import datetime, timezone
+
+now = datetime(2014, 8, 10, 18, 18, 30)
+now_utc = now.replace(tzinfo=timezone.utc)
+now_local = now_utc.astimezone()
+print(now_local)
+time_format = '%Y-%m-%d %H:%M:%S'
+time_str = '2014-08-10 11:18:30'
+now = datetime.strptime(time_str, time_format)
+time_tuple = now.timetuple()
+from time import mktime
+utc_now = mktime(time_tuple)
+print(utc_now)
+
+print("and pytz is a db of all time zones")
+import pytz
+
+arrival_nyc = '2014-05-01 23:33:24'
+print(arrival_nyc)
+nyc_dt_naive = datetime.strptime(arrival_nyc, time_format)
+eastern = pytz.timezone('US/Eastern')
+nyc_dt = eastern.localize(nyc_dt_naive)
+utc_dt = pytz.utc.normalize(nyc_dt.astimezone(pytz.utc))
+print(utc_dt)
+
+# Item __ ...
+print("====ITEM  ====")
+print("....")
+
+
 # Item 56 ...
 print("====ITEM 56: Test Everything with unittest ====")
 print("this is so self explanatory :) -- no code needed")
 print ("oh, but use mock")
 
-
 # Item __ ...
 print("====ITEM  ====")
 print("....")
+
