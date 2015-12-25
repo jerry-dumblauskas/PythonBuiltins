@@ -1152,19 +1152,66 @@ print("and pytz is a db of all time zones")
 import pytz
 
 arrival_nyc = '2014-05-01 23:33:24'
-print(arrival_nyc)
+print('arrival_nyc:',arrival_nyc)
 nyc_dt_naive = datetime.strptime(arrival_nyc, time_format)
 eastern = pytz.timezone('US/Eastern')
 nyc_dt = eastern.localize(nyc_dt_naive)
 utc_dt = pytz.utc.normalize(nyc_dt.astimezone(pytz.utc))
-print(utc_dt)
+print('utc_dt:', utc_dt)
 
-# Item __ ...
-print("====ITEM  ====")
-print("....")
+# Item 46 ...
+print("====ITEM  46: Use Built-in Algorithms and Data Structures ====")
+print("duh!  DO NOT REINVENT THE FRIGGIN WHEEL!!!")
+print("Double Ended Queue")
+from collections import deque, OrderedDict, defaultdict
+fifo = deque()
+fifo.append(1)
+fifo.append(2)
+fifo.append(3)
+print(fifo.pop())
+print(fifo.popleft())
 
+print("Ordered Dict")
+a = OrderedDict()
+a['foo'] = 1
+a['bar'] = 2
+b = OrderedDict()
+b['foo'] = 'red'
+b['bar'] = 'blue'
 
-# Item 56 ...
+for num, col in zip(a.values(), b.values()):
+    print(num,col)
+
+print("Default Dict -- suppress key errors")
+tst = defaultdict(int)
+print("normally this would puck, but now we get the default, which is 0....", tst['nokey'])
+
+print("Heap Queue -- Heaps are useful data structures for maintaining a priority queue. ")
+a = []
+from heapq import heappush, heappop
+heappush(a, 5)
+heappush(a, 3)
+heappush(a, 7)
+heappush(a, 4)
+print(a, " note that 7 is before 5 -- that is because it is first in the tree (visually)")
+print(heappop(a), heappop(a), heappop(a), heappop(a))
+
+print("Bisection -- The complexity of a binary search is logarithmic")
+from bisect import bisect_left
+x = list(range(10**6))
+i = x.index(991234)
+print(i)
+i = bisect_left(x, 991234)
+print(i)
+
+print("IterTools!")
+print("The itertools functions fall into three main categories:")
+print("Linking iterators together")
+print("Filtering items from an iterator")
+print(" Combinations of items from iterators")
+
+# Item 56
+#  ...
 print("====ITEM 56: Test Everything with unittest ====")
 print("this is so self explanatory :) -- no code needed")
 print ("oh, but use mock")
