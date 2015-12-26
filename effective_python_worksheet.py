@@ -1210,6 +1210,26 @@ print("Linking iterators together")
 print("Filtering items from an iterator")
 print(" Combinations of items from iterators")
 
+
+# Item 47 ...
+print("====ITEM 47: Use decimal When Precision Is Paramount ====")
+print("IEEE 754 floating point accuracy AND you can control rounding")
+from decimal import Decimal, ROUND_UP
+rate = 1.45
+seconds = 222
+cost = rate * seconds / 60
+print ("==using float")
+print(cost)
+print(round(cost,2))
+print("==using Decimal")
+rate = Decimal('1.45')
+seconds = Decimal('222')
+cost = rate * seconds / 60
+print(cost)
+rounded = cost.quantize(Decimal('0.01'), rounding=ROUND_UP)
+print(rounded)
+
+
 # Item 56
 #  ...
 print("====ITEM 56: Test Everything with unittest ====")
