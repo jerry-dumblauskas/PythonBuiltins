@@ -1230,13 +1230,69 @@ rounded = cost.quantize(Decimal('0.01'), rounding=ROUND_UP)
 print(rounded)
 
 
-# Item 56
-#  ...
+# Item 48 ...
+print("====ITEM 48: Know Where to Find Community-Built Modules ====")
+print("use Pip or a dist like Conda!")
+
+# Item 49 ...
+print("====ITEM 49: Write Docstrings for Every Function, Class, and Module ====")
+print("Once you do, the __doc__ can be called -- also, use double quotes")
+
+# Item 50 ...
+print("====ITEM 50: Use Packages to Organize Modules and Provide Stable APIs ====")
+print("an empty init in a folder makes the folder a package")
+print("use the __all__ in the init to expose an 'interface' to callers")
+
+# Item 51 ...
+print("====ITEM 51: Define a Root Exception to Insulate Callers from APIs ====")
+print("for APIs it’s much more powerful to define your own hierarchy of exceptions.")
+print("This way -- a caller to your api can catch just YOUR exception if they want")
+
+# Item 52 ...
+print("====ITEM 52: Know How to Break Circular Dependencies ====")
+print("Never saw this until BofA, but I guess it happens elsewhere")
+print("when a code is loaded, the issue is that in steps 4 and 5")
+print("4. Inserts the module into sys.modules")
+print("5. Runs the code in the module object to define its contents")
+print("after step 4 the circular dep is called, BEFORE the code is run -- and that causes the")
+print("issue at step 5 ")
+print("best approach is The best way to break a circular dependency is refactoring mutual ")
+print("dependencies into a separate module at the bottom of the dependency tree.")
+print("don't do dymanic imports i.e import right before the call -- that is hard to read")
+
+# Item 53 ...
+print("====ITEM 53: Use Virtual Environments for Isolated and Reproducible Dependencies ====")
+print("use pyvenv -- this allows you to test an deploy code -- REMEMBER to source the activate script!!!")
+print("pip3 freeze > requirements.txt can be used to create a fi;e you can transfer to a new virtual env")
+print("(or to production")
+print("in conda use conda create -- same thing")
+
+# Item 54 ...
+print("====ITEM 54: Consider Module-Scoped Code to Configure Deployment Environments ====")
+print("use a variable to determine things like test and prod db's")
+print("use configparser to build config scripts to do the same thing")
+
+# Item 55 ...
+print("====ITEM 55: Use repr Strings for Debugging Output ====")
+print("Calling print on built-in Python types will produce the human-readable string version of a value,")
+print("which hides type information.")
+a = '\x07'
+print(repr(a))
+print(a, " which should be nothing")
+
+# Item 56 ...
 print("====ITEM 56: Test Everything with unittest ====")
 print("this is so self explanatory :) -- no code needed")
 print ("oh, but use mock")
 
+# Item 57 ...
+print("====ITEM 57: Consider Interactive Debugging with pdb ====")
+print("use your ide for the most part :)")
+
+# Item 58 ...
+print("====ITEM 58: Profile Before Optimizing ====")
+print("....")
+
 # Item __ ...
 print("====ITEM  ====")
 print("....")
-
