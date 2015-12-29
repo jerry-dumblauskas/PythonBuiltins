@@ -1341,4 +1341,20 @@ stats.print_stats()
 
 # Item 59 ...
 print("====ITEM 59: Use tracemalloc to Understand Memory Usage and Leaks ====")
-print("only in 3.4 and above")
+print("only in 3.4 and above, figure out what is taking memory")
+import tracemalloc
+tracemalloc.start(10)
+time1 = tracemalloc.take_snapshot()
+l=[]
+for i in range(1000000):
+    l.append('g')
+
+time2 = tracemalloc.take_snapshot()
+stats = time2.compare_to(time1, 'lineno')
+for stat in stats[:3]:
+    print(stat)
+
+stats = time2.compare_to(time1, 'traceback')
+top = stats[0]
+print("biggest waster")
+print('\n'.join(top.traceback.format()))
