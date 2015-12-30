@@ -1,19 +1,19 @@
 __author__ = 'jerrydumblauskas'
 
 import sys
-# Item 1 version
-print("====ITEM 1 -- Know which version you are using ====")
+# Item 1 ...
+print("====ITEM 1: Know which version you are using ====")
 
 print((sys.version_info))
 print((sys.version))
 
-# Item 2 Pep 8
-print("====ITEM 2 -- Use PEP 8!! ====")
+# Item 2 ...
+print("====ITEM 2: Use PEP 8!! ====")
 
 print("pip install pylint, and use it!")
 
-# Item 3 Know the Differences Between bytes, str, and unicode
-print("====ITEM 3 -- Know the Differences Between bytes, str, and unicode ====")
+# Item 3 ...
+print("====ITEM 3: Know the Differences Between bytes, str, and unicode ====")
 
 print("for py2 just str and unicode")
 print("str is raw 8 bit values -- unicode is all else")
@@ -21,15 +21,15 @@ print("str is the lowest level -- the thing you encode to (the binary representa
 print("string to unicode ----- you must decode the string")
 print("unicode to string ----- you must encode the unicode")
 
-# Item 4 Write Helper Functions Instead of Complex Expressions
-print("====ITEM 4 -- Write Helper Functions Instead of Complex Expressions ====")
+# Item 4 ...
+print("====ITEM 4: Write Helper Functions Instead of Complex Expressions ====")
 
 print("this is a stylistic rule -- what some consider clear and concise")
 print("some will consider obtuse and bloated")
 print("the rule here is don't show off your one line ability")
 
-# Item 5 Know How to Slice Sequences
-print("====ITEM 5 -- Know How to Slice Sequences ====")
+# Item 5 ...
+print("====ITEM 5: Know How to Slice Sequences ====")
 
 print("using this list a = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']")
 a = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
@@ -45,7 +45,7 @@ print(id(r))
 print(a)
 
 # Item 6 ...
-print("====ITEM 6 -- Avoid Using start, end, and stride in a Single Slice====")
+print("====ITEM 6: Avoid Using start, end, and stride in a Single Slice====")
 print(a[::-2])
 
 print("hard to read a[0:6:-3], and what does it return (it's a trick)")
@@ -55,7 +55,7 @@ print(a[0:6:-3])
 
 
 # Item 7 ...
-print("====ITEM 7 Use List Comprehensions Instead of map and filter ====")
+print("====ITEM 7: Use List Comprehensions Instead of map and filter ====")
 
 b = [1,2,3,4,5,6,7,8,9]
 print("map and filters need lambdas (or at least a function")
@@ -67,14 +67,14 @@ print([x ** 2 for x in b])
 
 
 # Item 8 ...
-print("====ITEM 8 Avoid More Than Two Expressions in List Comprehensions ====")
+print("====ITEM 8: Avoid More Than Two Expressions in List Comprehensions ====")
 
 print("This is a simple one, no code needed, as I don't want to write a convoluted example to say")
 print("DON'T DO THAT")
 
 
 # Item 9 ...
-print("====ITEM 9 Consider Generator Expressions for Large Comprehensions ====")
+print("====ITEM 9: Consider Generator Expressions for Large Comprehensions ====")
 
 print("if large, you can run out of memory")
 print("value = [len(x) for x in open('/tmp/my_file.txt')]")
@@ -85,7 +85,7 @@ print("also, Generator expressions can be composed by passing the iterator from 
 print(" i.e -- you can chain them")
 
 # Item 10 ...
-print("====ITEM Item 10: Prefer enumerate Over range ====")
+print("====ITEM 10: Prefer enumerate Over range ====")
 
 print("like range, but gives you a tuple with position")
 print("range(10) vs enumerate(10) vs enumerate(10,1)")
