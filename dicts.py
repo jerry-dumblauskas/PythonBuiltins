@@ -56,3 +56,12 @@ for k, v in tst1.items():
 rtx = zip(tst1, tst2)
 for x in rtx:
     print (x)
+
+"""
+recipe 5 -- DefaultDict
+"""
+print("=====Recipe 5 -- defaultdict")
+from collections import defaultdict
+
+tst_dict = defaultdict(int)
+print("no key gives back", tst_dict['nokey'])
