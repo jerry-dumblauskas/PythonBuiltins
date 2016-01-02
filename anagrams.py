@@ -11,7 +11,7 @@ def check_them(tst1, tst2):
     if len(tst1) != len(tst2):
         return False
 
-    tst2_sorted = sorted(tst1)
+    tst2_sorted = sorted(tst2)
 
     for pos, item in enumerate(sorted(tst1)):
         if item != tst2_sorted[pos]:
