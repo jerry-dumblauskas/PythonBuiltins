@@ -792,19 +792,22 @@ print("subprocess is a builtin module")
 
 print ("run a simple subprocess -- blocking")
 import subprocess
-proc = subprocess.Popen(['echo', 'go home'], stdout=subprocess.PIPE)
-out, err = proc.communicate()
-print (out)
-proc = subprocess.Popen(['ps'], stdout=subprocess.PIPE)
-out, err = proc.communicate()
-print (proc.pid)
+try:
+    proc = subprocess.Popen(['echo', 'go home'], stdout=subprocess.PIPE)
+    out, err = proc.communicate()
+    print (out)
+    proc = subprocess.Popen(['ps'], stdout=subprocess.PIPE)
+    out, err = proc.communicate()
+    print (proc.pid)
 
-print ("run a simple subprocess -- nonblocking")
-proc = subprocess.Popen(['sleep', '.1'])
-while proc.poll() is None:
-    pass
-    #print ("lots of work")
-print ("exit status...", proc.poll())
+    print ("run a simple subprocess -- nonblocking")
+    proc = subprocess.Popen(['sleep', '.1'])
+    while proc.poll() is None:
+        pass
+        #print ("lots of work")
+    print ("exit status...", proc.poll())
+except FileNotFoundError as e:
+    print("in windows for now....let's fix this later")
 
 print ("run a bunch in parallel")
 def run_sleep(per):
@@ -813,44 +816,54 @@ def run_sleep(per):
 from time import time
 start = time()
 procs=[]
-for _ in range(10):
-    proc = run_sleep('.1')
-    procs.append(proc)
+try:
+    for _ in range(10):
+        proc = run_sleep('.1')
+        procs.append(proc)
 
-for proc in procs:
-    proc.communicate()
-    print (proc.pid)
-end = time()
-print('Finished in %.3f seconds' % (end - start))
-
+    for proc in procs:
+        proc.communicate()
+        print (proc.pid)
+    end = time()
+    print('Finished in %.3f seconds' % (end - start))
+except FileNotFoundError as e:
+    print("in windows for now....let's fix this later")
 
 # Item 37 ...
 print("====ITEM 37: Use Threads for Blocking I/O, Avoid for Parallelism ====")
-print("thi gil!!  But if you have system io, try threads")
+print("the gil!!  But if you have system io, try threads")
 import select
 from threading import Thread, Lock
 
 
 def slow_select():
-    select.select([], [], [], .1)
+    try:
+        select.select([], [], [], .1)
+    except:
+        pass
 
-start = time()
-for _ in range(5):
-    slow_select()
-end = time()
-print('Took %.3f seconds' % (end - start))
 
-start = time()
-threads = []
-for _ in range(5):
-    thread = Thread(target=slow_select)
-    thread.start()
-    threads.append(thread)
-for thread in threads:
-    thread.join()
-end = time()
-print('using IO Took %.3f seconds' % (end - start))
-
+try:
+    start = time()
+    for _ in range(5):
+        slow_select()
+    end = time()
+    print('Took %.3f seconds' % (end - start))
+except Exception as e:
+    print("in windows with an OSError....let's fix this later")
+try:
+    start = time()
+    threads = []
+    for _ in range(5):
+        thread = Thread(target=slow_select)
+        thread.start()
+        threads.append(thread)
+    for thread in threads:
+        thread.join()
+    end = time()
+    print('using IO Took %.3f seconds' % (end - start))
+except OSError as e:
+    print("in windows for now....let's fix this later")
 # Item 38 ...
 print("====ITEM 38: Use Lock to Prevent Data Races in Threads ====")
 print("even with the gil -- need to lock critical sections")
@@ -967,12 +980,14 @@ print('Took %.3f seconds' % (end - start))
 
 print("using multiprocessing...")
 from concurrent.futures import  ProcessPoolExecutor
-start = time()
-pool = ProcessPoolExecutor(max_workers=2)  # The one change
-results = list(pool.map(gcd, numbers))
-end = time()
-print('Took %.3f seconds' % (end - start))
-
+try:
+    start = time()
+    pool = ProcessPoolExecutor(max_workers=2)  # The one change
+    results = list(pool.map(gcd, numbers))
+    end = time()
+    print('Took %.3f seconds' % (end - start))
+except Exception as e:
+    print("another windows fail....")
 
 # Item 42 ...
 print("====ITEM 42: Define Function Decorators with functools.wraps ====")
@@ -1080,7 +1095,10 @@ class GameState(object):
 import pickle
 
 state = GameState()
-state_path = '/tmp/game_state.bin'
+import tempfile
+
+state_path = tempfile.TemporaryFile().name
+
 with open(state_path, 'wb') as f:
     pickle.dump(state, f)
 
