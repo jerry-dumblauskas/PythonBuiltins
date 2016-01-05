@@ -1097,7 +1097,7 @@ import pickle
 state = GameState()
 import tempfile
 
-state_path = tempfile.TemporaryFile().name
+state_path = tempfile.NamedTemporaryFile().name
 
 with open(state_path, 'wb') as f:
     pickle.dump(state, f)
