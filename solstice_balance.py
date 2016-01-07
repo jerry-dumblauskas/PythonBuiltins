@@ -17,11 +17,31 @@ get the next 10 years of data and store it in here
 
 import datetime
 
-def get_mirrored_date():
+
+def get_solstice_date():
     """
-    main method that provides the solstice 'mirror' date
+    method that provides the solstice date to use
     :return: date
     """
     today_date = datetime.datetime.now().date()
+    today_year = today_date.year
+    june_solstice = datetime.date(today_year, 6, 21)
+    december_solstice = datetime.date(today_year, 12, 21)
+    last_december_solstice = datetime.date(today_year - 1, 12, 21)
 
-    return today_date
+    # edge cases -- either solstice dates return itself
+    if today_date == june_solstice:
+        return june_solstice
+    if today_date == december_solstice:
+        return december_solstice
+
+    pivot_date = june_solstice
+    time_delta = today_date - june_solstice
+    if time_delta.days < -91:
+        pivot_date = last_december_solstice
+    if time_delta.days > 91:
+        pivot_date = december_solstice
+
+    return pivot_date
+
+
