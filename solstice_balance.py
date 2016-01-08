@@ -45,3 +45,6 @@ def get_solstice_date():
     return pivot_date
 
 
+def get_mirror_date():
+    mirror_date = get_solstice_date()
+    return mirror_date - (datetime.datetime.now().date() - mirror_date)
