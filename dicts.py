@@ -65,3 +65,15 @@ from collections import defaultdict
 
 tst_dict = defaultdict(int)
 print("no key gives back", tst_dict['nokey'])
+
+"""
+recipe 6 -- namedtuple
+"""
+print("=====Recipe 6 -- namedtuple")
+from collections import namedtuple
+
+my_tup = namedtuple('my_tup', "a b c d")
+
+tst = my_tup([],2,3,"mix up")
+
+print ("access a tuple by name:", tst.d, ":", tst.a, ":", tst.b)
