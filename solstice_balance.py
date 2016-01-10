@@ -18,9 +18,9 @@ get the next 10 years of data and store it in here
 import datetime
 
 
-def get_solstice_date():
+def _get_solstice_date():
     """
-    method that provides the solstice date to use
+    method that provides the solstice date to use -- internal for now!
     :return: date
     """
     today_date = datetime.datetime.now().date()
@@ -46,5 +46,8 @@ def get_solstice_date():
 
 
 def get_mirror_date():
-    mirror_date = get_solstice_date()
+    mirror_date = _get_solstice_date()
     return mirror_date - (datetime.datetime.now().date() - mirror_date)
+
+if __name__ == "__main__":
+    print (get_mirror_date())
