@@ -11,6 +11,7 @@ print((sys.version))
 print("====ITEM 2: Use PEP 8!! ====")
 
 print("pip install pylint, and use it!")
+print("use PyCharm's built in tools")
 
 # Item 3 ...
 print("====ITEM 3: Know the Differences Between bytes, str, and unicode ====")
@@ -20,6 +21,14 @@ print("str is raw 8 bit values -- unicode is all else")
 print("str is the lowest level -- the thing you encode to (the binary representation)")
 print("string to unicode ----- you must decode the string")
 print("unicode to string ----- you must encode the unicode")
+print("for py3  there are two types that represent sequences of characters: bytes and str.")
+print("bytes are raw, str contain unicode")
+print("so you encode to bytes")
+
+basic_str = 'basic'
+print('a basic string is of type', type(basic_str))
+basic_b = basic_str.encode()
+print('and in py3 this encodes to ',type(basic_b))
 
 # Item 4 ...
 print("====ITEM 4: Write Helper Functions Instead of Complex Expressions ====")
@@ -35,7 +44,7 @@ print("using this list a = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']")
 a = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 print("a[0;5] == a[:5] so do that")
 print(a[:5])
-print(a[:-1])
+print('cut of the last item (a common idiom)', a[:-1])
 print("remember -- slices make copies of the list!")
 print(id(a))
 r=a[-5:]
