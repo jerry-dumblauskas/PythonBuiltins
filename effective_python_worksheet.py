@@ -78,8 +78,11 @@ print([x ** 2 for x in b])
 # Item 8 ...
 print("====ITEM 8: Avoid More Than Two Expressions in List Comprehensions ====")
 
-print("This is a simple one, no code needed, as I don't want to write a convoluted example to say")
-print("DON'T DO THAT")
+print("DON'T DO THIS")
+print("matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]")
+print("filtered = [[x for x in row if x % 3 == 0]")
+print("            for row in matrix if sum(row) >= 10]")
+print("print(filtered)")
 
 
 # Item 9 ...
@@ -98,9 +101,9 @@ print("====ITEM 10: Prefer enumerate Over range ====")
 
 print("like range, but gives you a tuple with position")
 print("range(10) vs enumerate(10) vs enumerate(10,1)")
-print(list(range(10)))
-print(list(enumerate(range(10))))
-print(list(enumerate(list(range(10)),1)))
+print("range(10) =", list(range(10)))
+print("enumerate(10) =", list(enumerate(range(10))))
+print("enumerate(10,1) =", list(enumerate(list(range(10)),1)))
 
 
 # Item 11 ...
@@ -114,7 +117,7 @@ print(list(zip(enumerate(range(10)), enumerate(list(range(10)), 1))))
 print("====ITEM 12 Avoid else Blocks After for and while Loops ====")
 
 print("this is stylistic, but valid -- not many people know this")
-print("this else should be called 'nobreak' ")
+print("this else should be called 'nobreak' per Raymond H. ")
 
 # Item 13 ...
 print("====ITEM 13: Take Advantage of Each Block in try/except/else/finally ====")
