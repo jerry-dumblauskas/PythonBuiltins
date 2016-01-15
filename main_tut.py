@@ -2,7 +2,7 @@
 '''
 comments -- the basics -- before we get fancy we should use
 1) decent algorithms
-2) builit ins
+2) built ins
 3) well documented and tested libraries
 4) Reinvent the wheel
 '''
