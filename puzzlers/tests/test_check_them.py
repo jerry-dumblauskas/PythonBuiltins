@@ -1,4 +1,4 @@
-from anagrams import check_them
+from puzzlers.anagrams import check_them
 
 __author__ = 'jerrydumblauskas'
 

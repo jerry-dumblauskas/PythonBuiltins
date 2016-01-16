@@ -1,5 +1,5 @@
 from unittest import TestCase
-from skyline import calc_skyline2
+from puzzlers.skyline import calc_skyline2
 __author__ = 'jerrydumblauskas'
 
 
