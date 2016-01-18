@@ -77,3 +77,20 @@ my_tup = namedtuple('my_tup', "a b c d")
 tst = my_tup([],2,3,"mix up")
 
 print ("access a tuple by name:", tst.d, ":", tst.a, ":", tst.b)
+
+"""
+recipe 7 -- dict.items
+in py3 items returns a 'dictionary view', which is
+a class that you can get an iter from
+note that views are now created fro .key() an .values() as well
+"""
+print("=====Recipe 7 -- dict.items")
+dishes = {'eggs': 2, 'sausage': 1, 'bacon': 1, 'spam': 500}
+dishes_items = dishes.items()
+print ('can get the len by calling len(dictview) on the view')
+print ('so len(dishes_items) is:', len(dishes_items))
+print("can get an iterator with iter(view")
+print("so, this gives", type(iter(dishes_items)))
+print("finally, you do an in check")
+print("in this case, for items(), use a tuple")
+print("so ('spam',500) in dishes is:", ('spam',500) in dishes_items)
