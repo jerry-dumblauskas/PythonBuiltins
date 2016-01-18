@@ -1,10 +1,9 @@
 # python tutorial
 '''
 comments -- the basics -- before we get fancy we should use
-1) decent algorithms
-2) built ins
-3) well documented and tested libraries
-4) Reinvent the wheel
+1) built ins
+2) well documented and tested libraries
+3) build yourself, but use decent algorithms, and incorporate the #1 and #2
 '''
 import collections
 from functools import reduce
