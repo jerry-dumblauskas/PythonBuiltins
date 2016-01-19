@@ -94,3 +94,11 @@ print("so, this gives", type(iter(dishes_items)))
 print("finally, you do an in check")
 print("in this case, for items(), use a tuple")
 print("so ('spam',500) in dishes is:", ('spam',500) in dishes_items)
+
+"""
+recipe 8 reverse a dictionary
+"""
+print("=====Recipe 8 -- reverse a dictionary")
+tst_dict = {'a':1, 'b':2, 'c':3}
+print ("start dict is:", tst_dict)
+print("reversed dict is:", dict([(x,y) for (y,x) in tst_dict.items()]))

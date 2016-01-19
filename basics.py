@@ -3,7 +3,7 @@ mn_list = [1,4,5,3,2,6,8,9,0]
 mx_list = [0,7,3,1,6,5,3,8,5]
 p = zip(mn_list,mx_list)
 print ("zip output -- a list of tuples")
-print (p)
+print (list(p))
 
 print ("wrap syntax -- if you call a function with a *x, it is an iterable that will be unpacked, into the function")
 print ("if it is in the func arg list, the values will be wrapped into a tuple")
@@ -30,7 +30,8 @@ splat_vars(*lst)
 wrap_in_a_tuple(lst, 3)
 
 print ("dean's test")
-print (zip(*p))
+p = zip(mn_list,mx_list)
+print (list(zip(*p)))
 
 
 print ("DECORATOR TESTS")
