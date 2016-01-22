@@ -225,7 +225,7 @@ def issue(m_iter):
     :param m_iter: iterable
     :return: indeed, what will we return?
     """
-    print (sum(m_iter))
+    print (sum(m_iter), "in issue method")
     rtn = []
     for x in m_iter:
         rtn.append(x)
@@ -236,10 +236,11 @@ def m_iterator():
     for i in range(6):
         yield i
 
-print ("This won't work")
+print ("As stated, the iterable will work")
 lst=[0,1,2,3,4,5]
-print (issue(lst))
-print (issue(m_iterator()))
+print (issue(lst), " should be the list ", lst)
+print ("But an iterable will not work")
+print (issue(m_iterator()), " should be a list like ", lst)
 
 
 class wrap_generator_in_an_iterable(object):
@@ -843,7 +844,7 @@ except FileNotFoundError as e:
 
 # Item 37 ...
 print("====ITEM 37: Use Threads for Blocking I/O, Avoid for Parallelism ====")
-print("the gil!!  But if you have system io, try threads")
+print("This is the GIL!!  But if you have system io, try threads")
 import select
 from threading import Thread, Lock
 
