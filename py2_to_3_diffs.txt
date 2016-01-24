@@ -9,3 +9,11 @@ Things I've run into:
 5) range is an iterable
 6) unicode() builtin is gone
 7) file() builtin is gone
+8) unichr() builtin is gone
+9) xrange() is gone
+10) basestring() is gone -- use str
+11) Removed reduce(). Use functools.reduce()
+12) Removed reload(). Use imp.reload().
+13) Removed long() (now merged with int())
+14) Removed raw_input() -- actually renamed to input -- use  eval(input()) if want raw input
+15) Added ascii()
