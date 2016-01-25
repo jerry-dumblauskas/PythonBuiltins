@@ -5,7 +5,6 @@ comments -- the basics -- before we get fancy we should use
 2) well documented and tested libraries
 3) build yourself, but use decent algorithms, and incorporate #1 and #2
 '''
-import collections
 
 print("====================================")
 print("abs()")
@@ -49,7 +48,7 @@ print("bytes('testb') gives %s" % bytes('testb', 'utf8'))
 print("====================================")
 print("callable()")
 print("Return True if the passed object argument appears callable, False if not")
-print("callable('test') returns %s" % isinstance('test', collections.Callable))
+print("callable(str) returns %s" % callable(str))
 print("====================================")
 print("chr()")
 print("Return a string of one character whose ASCII code is the integer i.")
