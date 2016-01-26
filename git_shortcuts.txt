@@ -1,0 +1,18 @@
+git shortcuts
+
+the `git remote add` command takes two arguments:
+
+A remote name, for example, origin
+A remote URL, for example, https://github.com/user/repo.git
+
+===TO ADD AN UPSTREAM===
+git remote add upstream https://github.com/DataBrewery/cubes.git
+git fetch upstream
+
+===TO DIFF BETWEEN TWO REMOTES===
+git diff origin/master upstream/master
+
+===TO MERGE A FORK TO THE NEW HEAD===
+git fetch upstream
+git checkout master # should already be on master
+git merge upstream/master
