@@ -1,10 +1,10 @@
-# python tutorial
-'''
+# python built in functions
+"""
 comments -- the basics -- before we get fancy we should use
 1) built ins
 2) well documented and tested libraries
 3) build yourself, but use decent algorithms, and incorporate #1 and #2
-'''
+"""
 
 print("====================================")
 print("abs()")
@@ -26,7 +26,7 @@ print("====================================")
 print("ascii()")
 print("As repr(), return a string containing a printable representation of an object,")
 print("but escape the non-ASCII characters in the string returned by repr() ")
-print('using backtick x, backtick u or backtick U escapes.')
+print('using back tick x, back tick u or back tick U escapes.')
 print("ascii('ttt') gives %s" % ascii('ttt'))
 print("====================================")
 print("bin()")
@@ -115,7 +115,7 @@ print("see the format spec")
 print("format(10000000, ',') gives %s " % format(10000000, ','))
 print("====================================")
 print("frozenset()")
-print("creates a frozen set -- a specific immutable py type, from an interable")
+print("creates a frozen set -- a specific immutable py type, from an iterable")
 print("frozenset([1,2,3,4,5]) gives %s" % frozenset([1, 2, 3, 4, 5]))
 print("====================================")
 print("getattr()")
@@ -156,11 +156,11 @@ print("Return an integer object constructed from a number or string x")
 print("int(4.5) is %s and has type of %s" % (int(4.5), type(int(4.5))))
 print("====================================")
 print("isinstance()")
-print("Return true if the object argument is an instance of the classinfo argument")
+print("Return true if the object argument is an instance of the class info argument")
 print("isinstance('g', str) gives %s" % isinstance("g", str))
 print("====================================")
 print("issubclass()")
-print("Return true if class is a subclass (direct, indirect or virtual) of classinfo.")
+print("Return true if class is a subclass (direct, indirect or virtual) of class info.")
 print("Used in class programming")
 print("====================================")
 print("iter()")
@@ -274,11 +274,11 @@ print("sum(range(101)) gives %s" % sum(range(101)))
 print("====================================")
 print("super()")
 print("super (type, object) Return a proxy object that delegates method calls to a parent or sibling class of type")
-print("This changed alot in 3 -- so I'm ignoring till 3")
+print("This changed a lot in 3 -- so I'm ignoring till 3 -- so I guess I have to addres this!")
 print("====================================")
 print("tuple()")
-print("Return a tuple whose items are the same and in the same order as iterable' items.")
-print("tuple([1,2,3,4,5]) returns %s and has type of %s" % (tuple([1, 2, 3, 4, 5]), type(tuple([1, 2, 3, 4, 5]))))
+print("Return a tuple whose items are the same and in the same order as an iterables items.")
+print('tuple([1,2,3,4,5]) returns %s and has type of %s' % (tuple([1, 2, 3, 4, 5]), type(tuple([1, 2, 3, 4, 5]))))
 print("====================================")
 print("type()")
 print("2 uses -- called as type(object) gives the type")
