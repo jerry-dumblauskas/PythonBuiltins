@@ -49,5 +49,6 @@ def get_mirror_date():
     mirror_date = _get_solstice_date()
     return mirror_date - (datetime.datetime.now().date() - mirror_date)
 
+
 if __name__ == "__main__":
-    print (get_mirror_date())
+    print(get_mirror_date())

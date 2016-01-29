@@ -1,4 +1,3 @@
-
 def check_it(in_lst):
     """
     this function accepts a sorted list, then looks for the ONE missing number in the list
@@ -8,7 +7,7 @@ def check_it(in_lst):
     """
 
     st_val = in_lst[0]
-    half_pt = len(in_lst)/2
+    half_pt = len(in_lst) / 2
     half_val = in_lst[int(half_pt)]
 
     # final exit point -- when 2 items are left in the list
@@ -24,9 +23,8 @@ def check_it(in_lst):
 
 
 if __name__ == "__main__":
-
-    x = [0,2,3,4,5,6,7,8, 9,10]
-    assert  check_it(x) == 1
+    x = [0, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    assert check_it(x) == 1
     print(check_it(x))
     x = list(range(100))
     x.remove(0)
