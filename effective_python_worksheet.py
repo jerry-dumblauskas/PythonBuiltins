@@ -9,6 +9,7 @@ import select
 from threading import Thread, Lock
 from queue import Queue
 from time import time
+import pickle
 
 # Item 1 ...
 print("====ITEM 1: Know which version you are using ====")
@@ -103,7 +104,7 @@ print("try it = (len(x) for x in open('/tmp/my_file.txt'))")
 print("call by it.next()")
 print(
     "also, Generator expressions can be composed by passing the iterator from one "
-    "generator expression into the for subexpression of another.")
+    "generator expression into the for sub expression of another.")
 print(" i.e -- you can chain them")
 
 # Item 10 ...
@@ -266,7 +267,7 @@ print("But an iterable will not work")
 print(issue(m_iterator()), " should be a list like ", lst)
 
 
-class wrap_generator_in_an_iterable(object):
+class WrapGeneratorInAnIterable(object):
     """
     wrapping class container that creates a new generator on each call
     :return: new container class
@@ -281,7 +282,7 @@ class wrap_generator_in_an_iterable(object):
 
 print("This will work says Bruce")
 print(issue(lst))
-print(issue(wrap_generator_in_an_iterable()))
+print(issue(WrapGeneratorInAnIterable()))
 
 # Item 18 ...
 print("====ITEM  18: Reduce Visual Noise with Variable Positional Arguments ====")
@@ -394,8 +395,11 @@ print("if you need too many lists and dicts in a single class, refactor the comp
 print("...")
 
 
-class Weighted_Grade_Book(object):
+class WeightedGradeBook(object):
     # ...
+    def __init__(self):
+        self._grades = None
+
     def report_grade(self, name, subject, score, weight):
         by_subject = self._grades[name]
         grade_list = by_subject.setdefault(subject, [])
@@ -446,7 +450,7 @@ class Student(object):
         return total / count
 
 
-class Gradebook(object):
+class GradeBook(object):
     def __init__(self):
         self._students = {}
 
@@ -472,25 +476,29 @@ print("The below class can be constructed in many ways ")
 
 
 class MyData:
-    def __init__(self, data):
-        "Initialize MyData from a sequence"
-        self.data = data
+    def __init__(self, my_data):
+        """Initialize MyData from a sequence"""
+        self.data = my_data
 
     @classmethod
-    def fromfilename(cls, filename):
-        "Initialize MyData from a file"
-        data = open(filename).readlines()
-        return cls(data)
+    def from_filename(cls, filename):
+        """Initialize MyData from a file
+        :param filename:
+        """
+        my_data = open(filename).readlines()
+        return cls(my_data)
 
     @classmethod
-    def fromdict(cls, datadict):
-        "Initialize MyData from a dict's items"
+    def from_dict(cls, datadict):
+        """Initialize MyData from a dict's item
+        :param datadict:
+        """
         return cls(datadict.items())
 
 
 myD1 = MyData([1, 2, 3])
 print(myD1.data)
-myD1 = MyData.fromdict({1: 'one', 2: 'two'})
+myD1 = MyData.from_dict({1: 'one', 2: 'two'})
 print(myD1.data)
 
 # Item 25 ...
@@ -574,13 +582,12 @@ print('you can just inherit from list....but if you don\'t want to do that')
 print('the abc tells you what you need implement, and gives some scaffolding')
 
 
-
 class BadType(Sequence):
     def __getitem__(self, item):
-        "just need to impl this"
+        """just need to impl this"""
 
     def __len__(self):
-        "and this..."
+        """and this..."""
 
 
 foo = BadType()
@@ -678,7 +685,6 @@ print("this example also uses weakref (for memory leaks")
 print("descriptors are more generic and reusable then @prop")
 
 
-
 class Grade(object):
     def __init__(self):
         self._values = WeakKeyDictionary()
@@ -711,11 +717,14 @@ print(exam1.writing_grade)
 print("====ITEM Use __getattr__, __getattribute__, and __setattr__ for Lazy Attributes ====")
 
 print(
-    "If your class defines __getattr__, that method is called every time an attribute can’t be found in an object’s instance dictionary.")
+    "If your class defines __getattr__, that method is called every time an attribute can’t be "
+    "found in an object’s instance dictionary.")
 print(
-    "__getattribute__. This special method is called every time an attribute is accessed on an object, even in cases where it does exist in the attribute dictionary.")
+    "__getattribute__. This special method is called every time an attribute is accessed on an object,"
+    " even in cases where it does exist in the attribute dictionary.")
 print(
-    "The __setattr__ method is always called every time an attribute is assigned on an instance (either directly or through the setattr built-in function).")
+    "The __setattr__ method is always called every time an attribute is assigned on an instance "
+    "(either directly or through the setattr built-in function).")
 
 
 class LazyDB(object):
@@ -824,12 +833,12 @@ print("See how we have to enter in first_name twice???")
 
 
 class Meta(type):
-    def __new__(meta, name, bases, class_dict):
+    def __new__(mcs, name, bases, class_dict):
         for key, value in class_dict.items():
             if isinstance(value, Field):
                 value.name = key
                 value.internal_name = '_' + key
-        cls = type.__new__(meta, name, bases, class_dict)
+        cls = type.__new__(mcs, name, bases, class_dict)
         return cls
 
 
@@ -870,7 +879,6 @@ print("subprocess is a builtin module")
 
 print("run a simple subprocess -- blocking")
 
-
 try:
     proc = subprocess.Popen(['echo', 'go home'], stdout=subprocess.PIPE)
     out, err = proc.communicate()
@@ -892,10 +900,8 @@ print("run a bunch in parallel")
 
 
 def run_sleep(per):
-    proc = subprocess.Popen(['sleep', per])
-    return proc
-
-
+    local_proc = subprocess.Popen(['sleep', per])
+    return local_proc
 
 
 start = time()
@@ -916,7 +922,6 @@ except FileNotFoundError as e:
 # Item 37 ...
 print("====ITEM 37: Use Threads for Blocking I/O, Avoid for Parallelism ====")
 print("This is the GIL!!  But if you have system io, try threads")
-
 
 
 def slow_select():
@@ -1005,8 +1010,6 @@ print('Counter should be %d, found %d' %
 print("====ITEM 39: Use Queue to Coordinate Work Between Threads ====")
 print("queue is more efficient that doing it yourself")
 
-
-
 q = Queue()
 
 
@@ -1020,6 +1023,7 @@ t = Thread(target=consumer)
 t.start()
 
 import time
+
 time.sleep(4)
 print("producer putting")
 q.put("fff")
@@ -1195,8 +1199,6 @@ class GameState(object):
         self.level = 0
         self.lives = 4
 
-
-import pickle
 
 state = GameState()
 import tempfile
