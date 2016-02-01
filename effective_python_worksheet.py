@@ -1,15 +1,34 @@
-__author__ = 'jerrydumblauskas'
-
-import sys
 import collections
-from weakref import WeakKeyDictionary
-from collections.abc import Sequence
-import subprocess
-import select
-from threading import Thread, Lock
-from queue import Queue
-from time import time
+import copyreg
+import logging
 import pickle
+import select
+import subprocess
+import sys
+import tempfile
+import time as tm
+import tracemalloc
+from bisect import bisect_left
+from cProfile import Profile
+from collections import deque, OrderedDict, defaultdict
+from collections.abc import Sequence
+from concurrent.futures import ProcessPoolExecutor
+from contextlib import contextmanager
+from datetime import datetime, timezone
+from decimal import Decimal, ROUND_UP
+from functools import wraps
+from heapq import heappush, heappop
+from pstats import Stats
+from queue import Queue
+from random import randint
+from threading import Thread, Lock
+from time import mktime
+from time import time
+from weakref import WeakKeyDictionary
+
+import pytz
+
+__author__ = 'jerrydumblauskas'
 
 # Item 1 ...
 print("====ITEM 1: Know which version you are using ====")
@@ -153,8 +172,8 @@ print("This means 'don't bury exceptions -- let the caller deal with it")
 def foo(first, second):
     try:
         rtn = first / second
-    except ZeroDivisionError as exception:
-        print(">" + str(exception) + "< This is the exception you should re-raise, i.e 'raise e'")
+    except ZeroDivisionError as foo_exception:
+        print(">" + str(foo_exception) + "< This is the exception you should re-raise, i.e 'raise e'")
     else:
         return rtn
 
@@ -411,7 +430,8 @@ class WeightedGradeBook(object):
         for subject, scores in by_subject.items():
             subject_avg, total_weight = 0, 0
             for score, weight in scores:
-                pass
+                score_sum += score
+                total_weight += weight
         return score_sum / score_count
 
 
@@ -533,7 +553,8 @@ print("mixin is like adding a static set of functionality into a class")
 
 
 class BogusMixin(object):
-    def send_to_space(self):
+    @staticmethod
+    def send_to_space():
         print("blast off")
 
 
@@ -543,8 +564,9 @@ class MyParent(object):
 
 
 class Boring(MyParent, BogusMixin):
-    def __init__(self, data):
-        self.data = data
+    def __init__(self, passed_data):
+        super().__init__()
+        self.data = passed_data
 
     def do_work(self):
         self.send_to_space()
@@ -571,9 +593,9 @@ try:
 except Exception as e:
     print("exception is:" + str(e))
 
-print("see!  but you can work around this with a _Class in fromt")
-mc = MyClass()
-print(mc._MyClass__s)
+print("see!  but you can work around this with a _Class in front")
+mc1 = MyClass()
+print(mc1._MyClass__s)
 
 # Item 28 ...
 print("====ITEM 28: Inherit from collections.abc for Custom Container Types ====")
@@ -685,7 +707,7 @@ print("this example also uses weakref (for memory leaks")
 print("descriptors are more generic and reusable then @prop")
 
 
-class Grade(object):
+class Grades(object):
     def __init__(self):
         self._values = WeakKeyDictionary()
 
@@ -700,9 +722,9 @@ class Grade(object):
 
 class Exam(object):
     # Class attributes
-    math_grade = Grade()
-    writing_grade = Grade()
-    science_grade = Grade()
+    math_grade = Grades()
+    writing_grade = Grades()
+    science_grade = Grades()
 
 
 exam = Exam()
@@ -775,11 +797,11 @@ print("of their type are constructed.")
 
 
 class Meta(type):
-    def __new__(meta, name, bases, class_dict):
-        print((meta, name, bases, class_dict))
+    def __new__(mcs, name, bases, class_dict):
+        print((mcs, name, bases, class_dict))
         if class_dict.get('stuff') != 124:
             print("this could fail if we want")
-        return type.__new__(meta, name, bases, class_dict)
+        return type.__new__(mcs, name, bases, class_dict)
 
 
 class MyClass(object, metaclass=Meta):
@@ -810,7 +832,8 @@ class Field(object):
         self.internal_name = '_' + self.name
 
     def __get__(self, instance, instance_type):
-        if instance is None: return self
+        if instance is None:
+            return self
         return getattr(instance, self.internal_name, '')
 
     def __set__(self, instance, value):
@@ -825,10 +848,10 @@ class Customer(object):
     suffix = Field('suffix')
 
 
-foo = Customer()
-print('Before:', repr(foo.first_name), foo.__dict__)
-foo.first_name = 'Euclid'
-print('After: ', repr(foo.first_name), foo.__dict__)
+bar = Customer()
+print('Before:', repr(bar.first_name), bar.__dict__)
+bar.first_name = 'Euclid'
+print('After: ', repr(bar.first_name), bar.__dict__)
 print("See how we have to enter in first_name twice???")
 
 
@@ -853,7 +876,8 @@ class Field(object):
         self.internal_name = None
 
     def __get__(self, instance, instance_type):
-        if instance is None: return self
+        if instance is None:
+            return self
         return getattr(instance, self.internal_name, '')
 
     def __set__(self, instance, value):
@@ -867,10 +891,10 @@ class BetterCustomer(DatabaseRow):
     suffix = Field()
 
 
-foo = BetterCustomer()
-print('Before:', repr(foo.first_name), foo.__dict__)
-foo.first_name = 'Euler'
-print('After: ', repr(foo.first_name), foo.__dict__)
+bar = BetterCustomer()
+print('Before:', repr(bar.first_name), bar.__dict__)
+bar.first_name = 'Euler'
+print('After: ', repr(bar.first_name), bar.__dict__)
 print("only issue is the meta needs to know about the field object -- not sure I like that")
 
 # Item 36 ...
@@ -927,8 +951,8 @@ print("This is the GIL!!  But if you have system io, try threads")
 def slow_select():
     try:
         select.select([], [], [], .1)
-    except:
-        pass
+    except Exception as failed:
+        print(failed)
 
 
 try:
@@ -937,7 +961,7 @@ try:
         slow_select()
     end = time()
     print('Took %.3f seconds' % (end - start))
-except Exception as e:
+except OSError as exception:
     print("in windows with an OSError....let's fix this later")
 try:
     start = time()
@@ -967,20 +991,20 @@ class Counter(object):
         self.count += offset
 
 
-def worker(sensor_index, how_many, counter):
-    for _ in range(how_many):
-        counter.increment(1)
+def worker(sensor_index, passed_how_many, passed_counter):
+    for _ in range(passed_how_many):
+        passed_counter.increment(1)
 
 
-def run_threads(func, how_many, counter):
-    threads = []
-    for i in range(5):
-        args = (i, how_many, counter)
-        thread = Thread(target=func, args=args)
-        threads.append(thread)
-        thread.start()
-    for thread in threads:
-        thread.join()
+def run_threads(func, passed_how_many, passed_counter):
+    local_threads = []
+    for items in range(5):
+        args = (items, passed_how_many, passed_counter)
+        local_thread = Thread(target=func, args=args)
+        local_threads.append(local_thread)
+        local_thread.start()
+    for local_thread in local_threads:
+        local_thread.join()
 
 
 how_many = 10 ** 5
@@ -1022,9 +1046,7 @@ def consumer():
 t = Thread(target=consumer)
 t.start()
 
-import time
-
-time.sleep(4)
+tm.sleep(4)
 print("producer putting")
 q.put("fff")
 thread.join()
@@ -1059,21 +1081,20 @@ print("this is the multiprocessing module")
 
 
 def gcd(pair):
-    '''
-    greatist common divisor
+    """
+    greatest common divisor
     :param pair: tuple of ints
     :return: int
-    '''
-    a, b = pair
-    low = min(a, b)
-    for i in range(low, 0, -1):
-        if a % i == 0 and b % i == 0:
-            return i
+    """
+    first, second = pair
+    low = min(first, second)
+    for item in range(low, 0, -1):
+        if first % item == 0 and second % item == 0:
+            return item
 
 
 numbers = [(1963309, 2265973), (2030677, 3814172),
            (1551645, 2229620), (2039045, 2020802)]
-from time import time
 
 start = time()
 results = list(map(gcd, numbers))
@@ -1081,7 +1102,6 @@ end = time()
 print('Took %.3f seconds' % (end - start))
 
 print("using multiprocessing...")
-from concurrent.futures import ProcessPoolExecutor
 
 try:
     start = time()
@@ -1089,7 +1109,7 @@ try:
     results = list(pool.map(gcd, numbers))
     end = time()
     print('Took %.3f seconds' % (end - start))
-except Exception as e:
+except OSError as e:
     print("another windows fail....")
 
 # Item 42 ...
@@ -1115,8 +1135,6 @@ youza()
 print("here is the issue, the func object has been renamed!!")
 print(youza)
 
-from functools import wraps
-
 
 def my_dec(func):
     @wraps(func)
@@ -1140,8 +1158,6 @@ print(youza)
 # Item 43 ...
 print("====ITEM 43: Consider contextlib and with Statements for Reusable try/finally Behavior ====")
 print("no need to handle the __enter__ and __exit__")
-from contextlib import contextmanager
-import logging
 
 
 def my_function():
@@ -1156,13 +1172,13 @@ my_function()
 
 @contextmanager
 def logging_level(level):
-    logger = logging.getLogger()
-    old_level = logger.getEffectiveLevel()
-    logger.setLevel(level)
+    local_logger = logging.getLogger()
+    old_level = local_logger.getEffectiveLevel()
+    local_logger.setLevel(level)
     try:
         yield
     finally:
-        logger.setLevel(old_level)
+        local_logger.setLevel(old_level)
 
 
 print('with a context wrapping')
@@ -1175,13 +1191,13 @@ print("can also set to use with a 'with'")
 
 @contextmanager
 def log_level(level, name):
-    logger = logging.getLogger(name)
-    old_level = logger.getEffectiveLevel()
-    logger.setLevel(level)
+    local_logger = logging.getLogger(name)
+    old_level = local_logger.getEffectiveLevel()
+    local_logger.setLevel(level)
     try:
-        yield logger
+        yield local_logger
     finally:
-        logger.setLevel(old_level)
+        local_logger.setLevel(old_level)
 
 
 with log_level(logging.DEBUG, 'my-log') as logger:
@@ -1201,7 +1217,6 @@ class GameState(object):
 
 
 state = GameState()
-import tempfile
 
 state_path = tempfile.NamedTemporaryFile().name
 
@@ -1230,8 +1245,6 @@ def unpickle_game_state(kwargs):
     return GameState(**kwargs)
 
 
-import copyreg
-
 print("set the pickle constructor to an object type")
 copyreg.pickle(GameState, pickle_game_state)
 state = GameState()
@@ -1259,10 +1272,10 @@ print(pic.__dict__)
 print("====ITEM 45: Use datetime Instead of time for Local Clocks ====")
 print("Avoid using the time module for translating between different time zones.")
 print(
-    "Use the datetime built-in module along with the pytz module to reliably convert between times in different time zones.")
-print("Always represent time in UTC and do conversions to local time as the final step before presentation.")
-
-from datetime import datetime, timezone
+    "Use the datetime built-in module along with the pytz module to reliably convert between "
+    "times in different time zones.")
+print("Always represent time in UTC and do conversions to local time as the final step "
+      "before presentation.")
 
 now = datetime(2014, 8, 10, 18, 18, 30)
 now_utc = now.replace(tzinfo=timezone.utc)
@@ -1272,13 +1285,11 @@ time_format = '%Y-%m-%d %H:%M:%S'
 time_str = '2014-08-10 11:18:30'
 now = datetime.strptime(time_str, time_format)
 time_tuple = now.timetuple()
-from time import mktime
 
 utc_now = mktime(time_tuple)
 print(utc_now)
 
 print("and pytz is a db of all time zones")
-import pytz
 
 arrival_nyc = '2014-05-01 23:33:24'
 print('arrival_nyc:', arrival_nyc)
@@ -1292,7 +1303,6 @@ print('utc_dt:', utc_dt)
 print("====ITEM  46: Use Built-in Algorithms and Data Structures ====")
 print("duh!  DO NOT REINVENT THE FRIGGIN WHEEL!!!")
 print("Double Ended Queue")
-from collections import deque, OrderedDict, defaultdict
 
 fifo = deque()
 fifo.append(1)
@@ -1314,11 +1324,10 @@ for num, col in zip(a.values(), b.values()):
 
 print("Default Dict -- suppress key errors")
 tst = defaultdict(int)
-print("normally this would puck, but now we get the default, which is 0....", tst['nokey'])
+print("normally this would puck, but now we get the default, which is 0....", tst['no-key'])
 
 print("Heap Queue -- Heaps are useful data structures for maintaining a priority queue. ")
 a = []
-from heapq import heappush, heappop
 
 heappush(a, 5)
 heappush(a, 3)
@@ -1328,7 +1337,6 @@ print(a, " note that 7 is before 5 -- that is because it is first in the tree (v
 print(heappop(a), heappop(a), heappop(a), heappop(a))
 
 print("Bisection -- The complexity of a binary search is logarithmic")
-from bisect import bisect_left
 
 x = list(range(10 ** 6))
 i = x.index(991234)
@@ -1345,7 +1353,6 @@ print(" Combinations of items from iterators")
 # Item 47 ...
 print("====ITEM 47: Use decimal When Precision Is Paramount ====")
 print("IEEE 754 floating point accuracy AND you can control rounding")
-from decimal import Decimal, ROUND_UP
 
 rate = 1.45
 seconds = 222
@@ -1389,7 +1396,7 @@ print("after step 4 the circular dep is called, BEFORE the code is run -- and th
 print("issue at step 5 ")
 print("best approach is The best way to break a circular dependency is refactoring mutual ")
 print("dependencies into a separate module at the bottom of the dependency tree.")
-print("don't do dymanic imports i.e import right before the call -- that is hard to read")
+print("don't do dynamic imports i.e import right before the call -- that is hard to read")
 
 # Item 53 ...
 print("====ITEM 53: Use Virtual Environments for Isolated and Reproducible Dependencies ====")
@@ -1425,33 +1432,27 @@ print("====ITEM 58: Profile Before Optimizing ====")
 print("use CProfile -- faster than the pure python version")
 
 
-def insertion_sort(data):
-    result = []
-    for value in data:
-        insert_value(result, value)
-    return result
+def insertion_sort(passed_data):
+    local_result = []
+    for value in passed_data:
+        insert_value(local_result, value)
+    return local_result
 
 
 def insert_value(array, value):
-    for i, existing in enumerate(array):
+    for item, existing in enumerate(array):
         if existing > value:
-            array.insert(i, value)
+            array.insert(item, value)
             return
     array.append(value)
 
-
-from random import randint
 
 max_size = 10 ** 4
 data = [randint(0, max_size) for _ in range(max_size)]
 test = lambda: insertion_sort(data)
 
-from cProfile import Profile
-
 pp = Profile()
 pp.runcall(test)
-
-from pstats import Stats
 
 stats = Stats(pp)
 stats.strip_dirs()
@@ -1459,12 +1460,10 @@ stats.sort_stats('cumulative')
 print("slow======")
 stats.print_stats()
 
-from bisect import bisect_left
-
 
 def insert_value(array, value):
-    i = bisect_left(array, value)
-    array.insert(i, value)
+    item = bisect_left(array, value)
+    array.insert(item, value)
 
 
 test = lambda: insertion_sort(data)
@@ -1479,7 +1478,6 @@ stats.print_stats()
 # Item 59 ...
 print("====ITEM 59: Use tracemalloc to Understand Memory Usage and Leaks ====")
 print("only in 3.4 and above, figure out what is taking memory")
-import tracemalloc
 
 tracemalloc.start(10)
 time1 = tracemalloc.take_snapshot()
