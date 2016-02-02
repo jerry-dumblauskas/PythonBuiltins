@@ -1109,7 +1109,7 @@ try:
     results = list(pool.map(gcd, numbers))
     end = time()
     print('Took %.3f seconds' % (end - start))
-except OSError as e:
+except RuntimeError as e:
     print("another windows fail....")
 
 # Item 42 ...
