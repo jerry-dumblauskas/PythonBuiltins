@@ -1,4 +1,5 @@
 from collections import defaultdict, OrderedDict, namedtuple
+
 __author__ = 'jerrydumblauskas'
 
 """
@@ -42,6 +43,9 @@ print(m_set & another_set)
 print(m_set.union(another_set))
 print(m_set | another_set)
 
+print("set literals -- they look like dict but are sets")
+print("so, {{1,2,2,2,3}} will create a set of {}".format({1, 2, 2, 2, 3}))
+
 """
 recipe 4 -- OrderedDict
 """
@@ -62,7 +66,6 @@ for x in rtx:
 recipe 5 -- DefaultDict
 """
 print("=====Recipe 5 -- defaultdict")
-
 
 tst_dict = defaultdict(int)
 print("no key gives back", tst_dict['no_key'])
