@@ -105,3 +105,16 @@ print("=====Recipe 8 -- reverse a dictionary")
 tst_dict = {'a': 1, 'b': 2, 'c': 3}
 print("start dict is:", tst_dict)
 print("reversed dict is:", dict([(x, y) for (y, x) in tst_dict.items()]))
+
+"""
+recipe 9 splat a dict
+"""
+print("=====recipe 9 splat a dict")
+tst_dict = {'a': 'alpha', 'b': 2, 'c': 'charlie'}
+
+
+def foo(a, b, c):
+    print("this is {0}, and this is {2}, and this is {1}".format(a , b, c))
+
+
+foo(**tst_dict)
