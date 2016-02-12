@@ -18,13 +18,13 @@ def count_twos(inclusive_num):
     for l_num in range(inclusive_num + 1):
         for item in list(str(l_num)):
             if item == '2':
-                cnt+=1
+                cnt += 1
 
     return cnt
 
+
 if __name__ == "__main__":
     import timeit
+
     assert 10 == count_twos(26)
-    print (timeit.timeit('count_twos(22)', number=10000, globals=globals()))
-
-
+    print(timeit.timeit('count_twos(22)', number=10000, globals=globals()))

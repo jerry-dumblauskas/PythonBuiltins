@@ -1,3 +1,6 @@
+import sys
+
+
 __author__ = 'jerrydumblauskas'
 
 """
@@ -7,8 +10,6 @@ problem 17.8 write a method find the greatest congruent sequence of numbers in a
 i.e [2,-8,3,-2,4,-10] gives 5
 
 """
-
-import sys
 
 
 def find_max(in_lst):

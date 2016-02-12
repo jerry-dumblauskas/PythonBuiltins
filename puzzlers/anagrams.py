@@ -17,5 +17,3 @@ def check_them(tst1, tst2):
         if item != tst2_sorted[pos]:
             return False
     return True
-
-
