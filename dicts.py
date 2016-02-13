@@ -91,6 +91,7 @@ print("=====Recipe 7 -- dict.items")
 dishes = {'eggs': 2, 'sausage': 1, 'bacon': 1, 'spam': 500}
 dishes_items = dishes.items()
 print('can get the len by calling len(dictview) on the view')
+# noinspection PyTypeChecker
 print('so len(dishes_items) is:', len(dishes_items))
 print("can get an iterator with iter(view")
 print("so, this gives", type(iter(dishes_items)))
@@ -114,7 +115,7 @@ tst_dict = {'a': 'alpha', 'b': 2, 'c': 'charlie'}
 
 
 def foo(a, b, c):
-    print("this is {0}, and this is {2}, and this is {1}".format(a , b, c))
+    print("this is {0}, and this is {2}, and this is {1}".format(a, b, c))
 
 
 foo(**tst_dict)
