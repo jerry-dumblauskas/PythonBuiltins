@@ -2,11 +2,10 @@
 This module will be used to check the expected daylight hours on a day and
 return the day that most closest matches this day.
 
-for example, the winter solstice is usually on 12/21 -- so on 12/28 the daylight hours
+For example, the winter solstice is usually on 12/21 -- so on 12/28 the daylight hours
 are the same as 12/14.
 
-
-also, we want to compare to the nearest solstice -- Feb 21rst would compare back
+Also, we want to compare to the nearest solstice -- Feb 21rst would compare back
 October 21rst 'ish' whereas april 21rst should compare to a date in August
 
 Just learned that the winter solstice is not always on 12/21, but sometimes on
