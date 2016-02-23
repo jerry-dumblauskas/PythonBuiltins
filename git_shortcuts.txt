@@ -16,3 +16,6 @@ git diff origin/master upstream/master
 git fetch upstream
 git checkout master # should already be on master
 git merge upstream/master
+
+===TO SET UP A REMOTE TRACKING BRANCH(NOT MASTER)===
+git checkout -tb local_branch_name remotes/origin/tracked_branch_name
