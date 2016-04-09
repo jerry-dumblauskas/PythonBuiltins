@@ -1,5 +1,11 @@
 import sys
-
+"""
+basics of a script to start scraping data to get from our site
+TODO
+    1) add in call to site-- download data
+    2) update code below
+    3) store
+"""
 fi_read = open(sys.argv[1])
 fi_write = open(sys.argv[2], 'w')
 
