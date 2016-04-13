@@ -1,18 +1,28 @@
+import requests
+from bs4 import BeautifulSoup
 import sys
-"""
-basics of a script to start scraping data to get from our site
-TODO
-    1) add in call to site-- download data
-    2) update code below
-    3) store
-"""
-fi_read = open(sys.argv[1])
-fi_write = open(sys.argv[2], 'w')
 
-for line in fi_read:
-    line2 = line.split('\t')
-    nms = line2[0].split(" ")
-    if len(nms) <=1 :
-        nms.append(" ")
-    xxx = nms[0] + "~" + nms[1] + "~" + line2[1]
-    fi_write.write(xxx)
+# pass in my name
+nm = sys.argv[1]
+
+
+xx = requests.get('http://www.chipy.org/meetings/rsvp/list/e7sk8hzljyh8kdrvj9omztnwrt84djbxl7x19599/', auth=('', ''))
+
+my_file = nm + '/Downloads/wtf2.html'
+
+file_handle = open(my_file, 'w')
+file_handle.write(xx.text)
+
+soup = BeautifulSoup(open(my_file), 'html.parser')
+lst = ""
+for x in soup.find_all('tr'):
+    l_str = ""
+    for y in x.find_all('td'):
+        for zzz in y.stripped_strings:
+            l_str = l_str + zzz + '\t'
+    lst = lst + l_str + '\n'
+
+my_file_out = nm + '/Downloads/wtf2.out'
+l_file_out = open(my_file_out, 'w')
+l_file_out.write(lst)
+l_file_out.close()
