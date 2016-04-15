@@ -5,8 +5,10 @@ import sys
 # pass in my name
 nm = sys.argv[1]
 
+# pass in id
+l_id = sys.argv[2]
 
-xx = requests.get('http://www.chipy.org/meetings/rsvp/list/e7sk8hzljyh8kdrvj9omztnwrt84djbxl7x19599/', auth=('', ''))
+xx = requests.get('http://www.chipy.org/meetings/rsvp/list/' + l_id + "/", auth=('', ''))
 
 my_file = nm + '/Downloads/wtf2.html'
 
