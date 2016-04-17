@@ -24,3 +24,19 @@ git checkout -tb local_branch_name remotes/origin/tracked_branch_name
 git checkout --track origin/serverfix
 git remote prune origin
 git branch -m newbranch
+
+# Deploy changes to master
+    git push heroku master
+
+    # Deploy feature branch
+    git push heroku feature/mybranch:master
+
+    # Collectstatic
+    heroku run python manage.py collectstatic --noinput
+
+    # Set sync and migrate the database
+    heroku run python manage.py syncdb
+    heroku run python manage.py migrate
+
+    # Set environment variable on Heroku
+    heroku config:set DEBUG=True
