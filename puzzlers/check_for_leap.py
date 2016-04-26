@@ -2,6 +2,8 @@
 check for leap year
 the formula is divisible by 4, and if divisible by 100, also must be divisible by 400
 use the modulo
+
+tests are in the tests folder (how to link??)
 """
 
 
