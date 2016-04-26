@@ -26,7 +26,7 @@ git remote prune origin
 git branch -m newbranch
 
 === HEROKU ===
-1) heroku create  (prepare heroku to revcieve code)
+1) heroku create  add_a_name (prepare heroku to revcieve code)
 2) git push heroku master (deploy code)
 3) heroku ps:scale web=1 (start it)
 4) heroku logs (view logs)
@@ -42,3 +42,13 @@ heroku run python manage.py migrate
 
 # Set environment variable on Heroku
 heroku config:set DEBUG=True
+
+
+=== to run my local heroku
+heroku config:set SECRET_KEY=?????
+heroku config:set ADMINS=jdumblauskas@gmail.com
+heroku config:set ENVELOPE_EMAIL_RECIPIENTS=jdumblauskas@gmail.com
+heroku config:set DEBUG=False
+heroku config:set ALLOWED_HOSTS="jerry-chipy.herokuapp.com"
+
+
