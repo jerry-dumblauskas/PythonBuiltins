@@ -75,9 +75,9 @@ print("a[0;5] == a[:5] so do that")
 print(a[:5])
 print('cut of the last item (a common idiom)', a[:-1])
 print("remember -- slices make copies of the list!")
-print(id(a) + " the id of the list a")
+print(str(id(a)) + " the id of the list a")
 qq = a[:]
-print(id(qq) + " the id of the list qq, which was sliced from a")
+print(str(id(qq)) + " the id of the list qq, which was sliced from a")
 
 print("note that the slice {-x:] will start from x back and go to the end of the list")
 r = a[-5:]
