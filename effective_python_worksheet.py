@@ -1363,7 +1363,7 @@ print(round(cost, 2))
 print("==using Decimal")
 rate = Decimal('1.45')
 seconds = Decimal('222')
-cost = rate * seconds / 60
+cost = Decimal(rate * seconds / 60)
 print(cost)
 rounded = cost.quantize(Decimal('0.01'), rounding=ROUND_UP)
 print(rounded)
