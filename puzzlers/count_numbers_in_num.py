@@ -5,6 +5,7 @@ from 'cracking the coding interview' 5th edition
 
 problem 18.4 write a method to count the number of 2's
 between 0 and n (inclusive)
+so, for example, going from 0 to 15 would be 2 twos, one in '2' and the other in '12'
 """
 
 
@@ -28,3 +29,5 @@ if __name__ == "__main__":
 
     assert 10 == count_twos(26)
     print(timeit.timeit('count_twos(22)', number=10000, globals=globals()))
+
+    print(count_twos(20))

@@ -75,12 +75,13 @@ print("a[0;5] == a[:5] so do that")
 print(a[:5])
 print('cut of the last item (a common idiom)', a[:-1])
 print("remember -- slices make copies of the list!")
-print(id(a))
+print(str(id(a)) + " the id of the list a")
+qq = a[:]
+print(str(id(qq)) + " the id of the list qq, which was sliced from a")
+
+print("note that the slice {-x:] will start from x back and go to the end of the list")
 r = a[-5:]
-r[0] = 5
 print(r)
-print(id(r))
-print(a)
 
 # Item 6 ...
 print("====ITEM 6: Avoid Using start, end, and stride in a Single Slice====")

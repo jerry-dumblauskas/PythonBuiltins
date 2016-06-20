@@ -24,7 +24,7 @@ def _get_solstice_date():
     """
     today_date = datetime.datetime.now().date()
     today_year = today_date.year
-    june_solstice = datetime.date(today_year, 6, 21)
+    june_solstice = datetime.date(today_year, 6, 20)
     december_solstice = datetime.date(today_year, 12, 21)
     last_december_solstice = datetime.date(today_year - 1, 12, 21)
 
