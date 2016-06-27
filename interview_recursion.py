@@ -21,11 +21,14 @@ def check_it(in_lst):
         rtn = check_it(in_lst[:int(half_pt) + 1])
     return rtn
 
+def check_it_easy(x):
+    return sum(range(x[-1] + 1)) - sum(x)
 
 if __name__ == "__main__":
     x = [0, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     assert check_it(x) == 1
     print(check_it(x))
+    print (check_it_easy(x))
     x = list(range(100))
     x.remove(0)
     print(x)
