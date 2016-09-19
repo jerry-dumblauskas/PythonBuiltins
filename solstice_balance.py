@@ -12,7 +12,7 @@ Just learned that the winter solstice is not always on 12/21, but sometimes on
 12/22 -- don't want an internet connection to make this work, so I'll either find a formula, or
 get the next 10 years of data and store it in here
 
-Fine as is (jad 9/19)
+Fine as is (jad 9/19) no really
 """
 
 import datetime
