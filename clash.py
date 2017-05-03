@@ -241,7 +241,7 @@ dat = ["Silver",
 
 if __name__ == "__main__":
     positions = []
-    chk_lst = ["Silver", "Giant"]
+    chk_lst = ["Silver", "Silver", "Silver", "Magic"]
     for pos in range(len(dat)):
         if chk_lst == dat[pos:len(chk_lst) + pos]:
             positions.append(pos)
