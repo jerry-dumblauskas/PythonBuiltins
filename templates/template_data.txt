@@ -1,0 +1,8 @@
+package x.y.z.
+
+import abc.*;
+
+public class {{ClassName}} {
+
+}
+
