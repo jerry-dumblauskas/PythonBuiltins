@@ -20,6 +20,10 @@ git merge upstream/master
 ===TO SET UP A REMOTE TRACKING BRANCH(NOT MASTER)===
 git checkout -tb local_branch_name remotes/origin/tracked_branch_name
 
+===TO GET THE URL OF A REPO===
+git remote show origin
+git remote show upstream
+
 === enterprise ===
 git checkout --track origin/serverfix
 git remote prune origin
