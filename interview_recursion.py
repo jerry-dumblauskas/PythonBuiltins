@@ -7,7 +7,6 @@ if __name__ == "__main__":
     print(check_it_easy(x))
     x = list(range(100))
     print(x)
-    x.remove(0)
     x.remove(55)
     print(x)
     print(check_it_easy(x))
