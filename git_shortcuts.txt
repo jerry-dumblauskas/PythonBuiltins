@@ -28,31 +28,3 @@ git remote show upstream
 git checkout --track origin/serverfix
 git remote prune origin
 git branch -m newbranch
-
-=== HEROKU ===
-1) heroku create  add_a_name (prepare heroku to revcieve code)
-2) git push heroku master (deploy code)
-3) heroku ps:scale web=1 (start it)
-4) heroku logs (view logs)
-
-
-=== More general HEROKU ===
-# Collectstatic
-heroku run python manage.py collectstatic --noinput
-
-# Set sync and migrate the database
-heroku run python manage.py syncdb
-heroku run python manage.py migrate
-
-# Set environment variable on Heroku
-heroku config:set DEBUG=True
-
-
-=== to run my local heroku
-heroku config:set SECRET_KEY=?????
-heroku config:set ADMINS=jdumblauskas@gmail.com
-heroku config:set ENVELOPE_EMAIL_RECIPIENTS=jdumblauskas@gmail.com
-heroku config:set DEBUG=False
-heroku config:set ALLOWED_HOSTS="jerry-chipy.herokuapp.com"
-
-
