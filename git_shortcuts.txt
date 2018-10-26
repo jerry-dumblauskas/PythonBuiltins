@@ -14,7 +14,7 @@ git diff origin/master upstream/master
 
 ===TO MERGE A FORK TO THE NEW HEAD===
 git fetch upstream
-git checkout master # should already be on master
+git checkout master # should already be on master of origin
 git merge upstream/master
 
 ===TO SET UP A REMOTE TRACKING BRANCH(NOT MASTER)===
