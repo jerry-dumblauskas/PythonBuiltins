@@ -5,11 +5,12 @@ class Solution:
         :type target: int
         :rtype: List[int]
         """
-        for l, left in enumerate(nums):
-            for r, right in enumerate(nums[1 + l:]):
-                if target == left + right:
-                    rtn = [l, r + 1 + l]
-                    return rtn
+        l_dict = {}
+        for i in range(len(nums)):
+            magic_test = target - nums[i]
+            if magic_test in l_dict:
+                return [l_dict[magic_test], i]
+            l_dict[nums[i]] = i
 
 
 if __name__ == '__main__':
