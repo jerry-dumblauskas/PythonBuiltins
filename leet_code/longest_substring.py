@@ -4,29 +4,29 @@ class Solution:
         :type s: str
         :rtype: int
         """
-        rtn_cnt = 0
+        lst = []
         l_rtn_cnt = 0
-        l_ptr = 0
-        candidate_dict = {}
-        next_ptr = 0
-        while l_ptr < len(s):
-            if s[l_ptr] not in candidate_dict:
-                candidate_dict[s[l_ptr]] = l_ptr
+        rtn_cnt = 0
+
+        for i, item in enumerate(s):
+            if item not in lst:
                 l_rtn_cnt += 1
+                lst.append(item)
             else:
-                candidate_dict = {}
-                l_ptr = next_ptr
-                next_ptr += 1
-                l_rtn_cnt = 0
+                for x in range(lst.index(item) + 1):
+                    lst.pop(0)
+                lst.append(item)
+                l_rtn_cnt = len(lst)
+
             if l_rtn_cnt > rtn_cnt:
                 rtn_cnt = l_rtn_cnt
-
-            l_ptr += 1
-
         return rtn_cnt
+
 
 
 if __name__ == '__main__':
     s = Solution()
-    ss = "q"
-    print(s.lengthOfLongestSubstring(ss))
+    ss = ["abcabcbb", "q", "bbbbb", "pwwkew", "aab", "dvdf", "abba"]
+
+    for it in ss:
+        print(it, s.lengthOfLongestSubstring(it))
