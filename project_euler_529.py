@@ -2,7 +2,7 @@ import re
 
 cache = {}
 matcher = re.compile("([2-9]99[2-9])|([3-9]88[3-9])|([4-9]77[4-9])")
-ending_zeros = re.compile("(.)(0+$)")
+ending_zeros = re.compile("(.+)(0+$)")
 
 
 def do_it(int_in):
