@@ -1,5 +1,6 @@
 import math
 
+
 def get_data():
     dta = open("./f_11.txt", 'r')
     lst_of_lists = []
@@ -15,19 +16,17 @@ def horizontal_max(dta):
     for row in dta:
         # 0 1 2 3 4 5
         row = [int(i) for i in row]
-        for cnt , item in enumerate(row):
-            if len(row) - cnt < 4 :
+        for cnt, item in enumerate(row):
+            if len(row) - cnt < 4:
                 break
             tst = math.prod(row[cnt:4 + cnt])
             if tst > max_val:
                 max_val = tst
 
-
     return max_val
 
 
 def vertical_max(dta):
-    max_value = 0
     transposed_lst = []
     for i in range(len(dta[0])):
         tmp_lst = []
@@ -39,7 +38,7 @@ def vertical_max(dta):
 
 
 def diagonal_max(dta):
-    return 3
+    return len(dta)
 
 
 if __name__ == '__main__':
