@@ -41,6 +41,7 @@ def diagonal_max(dta):
     return len(dta)
 
 
+# main
 if __name__ == '__main__':
     row_lst = get_data()
     vert = vertical_max(row_lst)
