@@ -27,7 +27,15 @@ def horizontal_max(dta):
 
 
 def vertical_max(dta):
-    return 2
+    max_value = 0
+    transposed_lst = []
+    for i in range(len(dta[0])):
+        tmp_lst = []
+        for lst in dta:
+            tmp_lst.append(lst[i])
+        transposed_lst.append(tmp_lst)
+    print(transposed_lst)
+    return horizontal_max(transposed_lst)
 
 
 def diagonal_max(dta):
