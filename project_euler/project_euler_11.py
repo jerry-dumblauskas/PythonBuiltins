@@ -14,7 +14,6 @@ def get_data():
 def horizontal_max(dta):
     max_val = 0
     for row in dta:
-        # 0 1 2 3 4 5
         row = [int(i) for i in row]
         for cnt, item in enumerate(row):
             if len(row) - cnt < 4:
@@ -38,13 +37,34 @@ def vertical_max(dta):
 
 
 def diagonal_max(dta):
-    return len(dta)
+    max_val = 0
+    for row in range(17):
+        for col in range(17):
+            num1 = int(dta[row][col])
+            num2 = int(dta[row + 1][col + 1])
+            num3 = int(dta[row + 2][col + 2])
+            num4 = int(dta[row + 3][col + 3])
+            l_val = num1 * num2 * num3 * num4
+            if l_val > max_val:
+                max_val = l_val
+
+    for row in range(19, 0, -1):
+        for col in range(17):
+            num1 = int(dta[row][col])
+            num2 = int(dta[row - 1][col + 1])
+            num3 = int(dta[row - 2][col + 2])
+            num4 = int(dta[row - 3][col + 3])
+            l_val = num1 * num2 * num3 * num4
+            if l_val > max_val:
+                max_val = l_val
+    return max_val
 
 
 # main
 if __name__ == '__main__':
     row_lst = get_data()
-    vert = vertical_max(row_lst)
     hor = horizontal_max(row_lst)
+    vert = vertical_max(row_lst)
     diagonal = diagonal_max(row_lst)
+    print(f'vert={vert}, hor={hor}, diagonal={diagonal}')
     print(max(hor, vert, diagonal))
