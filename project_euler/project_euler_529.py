@@ -10,8 +10,8 @@ matcher = re.compile(
 
 
 def do_it(int_in):
-    if int_in == 199:
-        print("bummer")
+    # if int_in == 1991:
+        # print("bummer")
     work_unit = str(int_in).replace("0", "")
     st = 0
     end = len(work_unit)
@@ -26,10 +26,9 @@ def do_it(int_in):
     # Try and use a cache (since we are stripping strings)
     if cache.get(work_unit) == 1:
         return [1 for _x in range(end)]
-    #find substrings
-    for subby in range(len(work_unit)):
-        if cache_bad.get(work_unit[subby:]) == 1:
-            return [0 for _x in range(end)]
+    # @todo find substrings
+    if cache_bad.get(work_unit) == 1:
+        return [0 for _x in range(end)]
 
     # end filter
     while st <= end - 1:
