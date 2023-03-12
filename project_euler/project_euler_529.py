@@ -1,12 +1,17 @@
 import re
 
 cache = {}
-matcher = re.compile("([2-9]99[2-9])|([3-9]88[3-9])|([4-9]77[4-9])")
+cache_bad = {}
+matcher = re.compile(
+    '([2-9]99[2-9])|([3-9]88[3-9])|([4-9]77[4-9])'
+    '|([5-9]66[5-9])|([7-9]44[7-9])'
+    '|(^9[2-9])|([2-9]9$)|(^8[3-9])|([3-9]8$)|(^7[4-9])|([4-9]7$)'
+    '|(^6[5-9])|([5-9]6$)|(^5[6-9])|([6-9]5$)|(^4[7-9])|([7-9]4$)|(^3[8-9])|([8-9]3$)|(^29|92$)')
 
 
 def do_it(int_in):
-    # if int_in == 0:
-    #     print("bummer")
+    if int_in == 199:
+        print("bummer")
     work_unit = str(int_in).replace("0", "")
     st = 0
     end = len(work_unit)
@@ -21,9 +26,13 @@ def do_it(int_in):
     # Try and use a cache (since we are stripping strings)
     if cache.get(work_unit) == 1:
         return [1 for _x in range(end)]
+    #find substrings
+    for subby in range(len(work_unit)):
+        if cache_bad.get(work_unit[subby:]) == 1:
+            return [0 for _x in range(end)]
 
     # end filter
-    while st < end:
+    while st <= end - 1:
         sub_while = st
         while tmp < 10:
             variable_under_the_scope = int(work_unit[sub_while])
@@ -55,8 +64,10 @@ if __name__ == '__main__':
             print("len is", x1, datetime.datetime.now())
         if tst and all(tst):
             cnt += 1
-            cache[str(x1)] = 1
+            cache[str(x1).replace("0", "")] = 1
             # print(x1)
+        else:
+            cache_bad[str(x1).replace("0", "")] = 1
     print(cnt)
     end_time = datetime.datetime.now()
     print(end_time - start_time)
