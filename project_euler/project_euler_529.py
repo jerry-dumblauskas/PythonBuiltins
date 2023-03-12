@@ -10,8 +10,6 @@ matcher = re.compile(
 
 
 def do_it(int_in):
-    # if int_in == 1991:
-        # print("bummer")
     work_unit = str(int_in).replace("0", "")
     st = 0
     end = len(work_unit)
@@ -22,14 +20,6 @@ def do_it(int_in):
     xx = matcher.search(work_unit)
     if xx:
         return truth_list
-
-    # Try and use a cache (since we are stripping strings)
-    if cache.get(work_unit) == 1:
-        return [1 for _x in range(end)]
-    # @todo find substrings
-    if cache_bad.get(work_unit) == 1:
-        return [0 for _x in range(end)]
-
     # end filter
     while st <= end - 1:
         sub_while = st
@@ -58,15 +48,20 @@ if __name__ == '__main__':
     cnt = 0
     power_of_ten = 7
     for x1 in range(pow(10, power_of_ten) + 1):
+        bs = str(x1).replace("0", "")
+        if cache_bad.get(bs) or cache_bad.get(bs[::-1]):
+            continue
+        if cache.get(bs) or cache.get(bs[::-1]):
+            cnt += 1
+            continue
+
         tst = do_it(x1)
-        if x1 % 1000000 == 0:
-            print("len is", x1, datetime.datetime.now())
+
         if tst and all(tst):
             cnt += 1
-            cache[str(x1).replace("0", "")] = 1
-            # print(x1)
+            cache[bs] = 1
         else:
-            cache_bad[str(x1).replace("0", "")] = 1
+            cache_bad[bs] = 1
     print(cnt)
     end_time = datetime.datetime.now()
     print(end_time - start_time)
